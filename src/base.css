@@ -1,0 +1,16 @@
+html,
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: rgb(0, 1, 36);
+  background: linear-gradient(
+    56deg,
+    rgba(0, 1, 36, 1) 0%,
+    rgba(41, 105, 84, 1) 54%,
+    rgba(43, 64, 77, 1) 100%
+  );
+}
+
+h1 {
+  font-family: "Comfortaa", sans-serif;
+}
