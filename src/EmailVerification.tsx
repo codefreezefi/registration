@@ -52,9 +52,10 @@ export const EmailVerification = ({
 }: {
   onVerified: (verified: boolean) => void;
 }) => {
+  const verifiedEmail = localStorage.getItem("verifiedEmail");
   let emailInput!: HTMLInputElement;
   let codeInput!: HTMLInputElement;
-  const [email, setEmail] = createSignal<string>();
+  const [email, setEmail] = createSignal<string>(verifiedEmail ?? "");
   const [codeRequest, setCodeRequest] = createSignal<CodeRequest>();
   const [code, setCode] = createSignal<string>();
   const [verificationRequested] = createResource(
@@ -68,7 +69,8 @@ export const EmailVerification = ({
     verifyEmailWithCode
   );
 
-  const emailVerified = (): boolean => emailVerification()?.success ?? false;
+  const emailVerified = (): boolean =>
+    verifiedEmail !== null || (emailVerification()?.success ?? false);
 
   createEffect(() => onVerified(emailVerified()));
 
@@ -85,7 +87,6 @@ export const EmailVerification = ({
               change
             </button>
           </p>
-          <hr />
         </Show>
         <Show when={!emailVerified()}>
           <div class="input-group mb-3">
@@ -100,6 +101,7 @@ export const EmailVerification = ({
               onchange={(e) => {
                 const v = e.target.value;
                 if (isValidEmail(v)) {
+                  localStorage.setItem("email", v);
                   setEmail(v);
                 }
               }}
@@ -201,6 +203,7 @@ export const EmailVerification = ({
                     ts: new Date(),
                     email: e,
                   });
+                  localStorage.setItem("verifiedEmail", e);
                 }
               }}
             >
