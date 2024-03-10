@@ -1,3 +1,6 @@
+:root {
+  --bs-body-font-family: "Instrument Sans", sans-serif;
+}
 html,
 body {
   height: 100%;
@@ -11,8 +14,16 @@ body {
     rgba(41, 105, 84, 1) 54%,
     rgba(43, 64, 77, 1) 100%
   );
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 h1 {
-  font-family: "Comfortaa", sans-serif;
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  margin: 0;
 }

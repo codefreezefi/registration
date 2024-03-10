@@ -1,0 +1,43 @@
+.logo {
+  animation: spin 60s linear infinite;
+  width: 10vh;
+  height: auto;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#root > header {
+  color: #eefaffab;
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+#root > header > *:nth-child(odd) {
+  justify-self: end;
+  margin-right: 0.5rem;
+}
+
+#root > header > *:nth-child(even) {
+  justify-self: start;
+  margin-left: 0.5rem;
+}
+
+#root > header h1 {
+  color: #f3f7b8;
+  text-shadow: 1px 1px 1px #2b404d, -1px 1px 1px #2b404d, -1px -1px 1px #2b404d,
+    1px -1px 1px #2b404d;
+  line-height: 65%;
+  font-size: 4vh;
+  margin: 0;
+}
+
+#root > header h1 small {
+  font-size: 70%;
+}
