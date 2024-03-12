@@ -1,0 +1,69 @@
+aside.profile {
+  color: white;
+  text-align: center;
+}
+
+aside.profile h1 {
+  line-height: 100%;
+  margin-bottom: 1rem;
+  color: rgb(243, 247, 184);
+}
+
+aside.profile h1 small {
+  font-size: 50%;
+}
+
+aside.profile h1 small::before {
+  content: "( ";
+  opacity: 0.5;
+}
+
+aside.profile h1 small::after {
+  content: " )";
+  opacity: 0.5;
+}
+
+aside.profile .lucide {
+  width: 150px;
+  height: 150px;
+}
+
+aside.profile .photo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+aside.profile .photo img {
+  max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  border-radius: 100%;
+  border: 5px solid rgb(243, 247, 184);
+}
+
+aside.profile dl.links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+aside.profile dl.links a {
+  color: white;
+}
+
+aside.profile dl.links dt {
+  padding-right: 0.5rem;
+  display: flex;
+  justify-content: end;
+}
+
+aside.profile dl.links dd {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+aside.profile dl.links svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 0.5rem;
+}

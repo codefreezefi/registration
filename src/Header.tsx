@@ -1,13 +1,14 @@
-import "./Header.css";
 import { Logo } from "./Logo";
 import { Codefreeze } from "./codefreeze";
+
+import "./Header.css";
 
 const dateFormat = new Intl.DateTimeFormat(undefined, {
   dateStyle: "full",
 });
 
 export const Header = () => (
-  <header>
+  <header class="main">
     <Logo class="logo" />
     <h1>
       CODE

@@ -10,7 +10,7 @@
   }
 }
 
-#root > header {
+header.main {
   color: #eefaffab;
   padding: 1rem 0;
   display: grid;
@@ -19,17 +19,17 @@
   align-items: center;
 }
 
-#root > header > *:nth-child(odd) {
+header.main > *:nth-child(odd) {
   justify-self: end;
   margin-right: 0.5rem;
 }
 
-#root > header > *:nth-child(even) {
+header.main > *:nth-child(even) {
   justify-self: start;
   margin-left: 0.5rem;
 }
 
-#root > header h1 {
+header.main h1 {
   color: #f3f7b8;
   text-shadow: 1px 1px 1px #2b404d, -1px 1px 1px #2b404d, -1px -1px 1px #2b404d,
     1px -1px 1px #2b404d;
@@ -38,6 +38,6 @@
   margin: 0;
 }
 
-#root > header h1 small {
+header.main h1 small {
   font-size: 70%;
 }

@@ -42,68 +42,50 @@ export const Email = () => {
         <label for="email" class="form-label">
           Your email address
         </label>
-        <Show when={registration.emailVerified}>
-          <p class="d-flex justify-content-between">
-            <code>{registration.email}</code>
+        <div class="input-group mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder='e.g. "name@example.com"'
+            ref={emailInput}
+            aria-describedby="emailHelpBlock"
+            value={registration.email ?? ""}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Show when={isValidEmail(email()) && registration.email !== email()}>
             <button
               type="button"
-              class="btn btn-sm btn-outline-danger"
-              onclick={() => {
-                update("email", null);
-                update("emailVerified", false);
+              class="btn btn-primary"
+              onClick={() => {
+                const v = emailInput.value;
+                if (isValidEmail(v)) {
+                  update("email", v);
+                }
               }}
             >
-              forget
+              request confirmation code
             </button>
-          </p>
-        </Show>
-        <Show when={!registration.emailVerified}>
-          <div class="input-group mb-3">
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="name@example.com"
-              ref={emailInput}
-              aria-describedby="emailHelpBlock"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Show
-              when={isValidEmail(email()) && registration.email !== email()}
+          </Show>
+          <Show when={registration.email !== null}>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              onClick={() => {
+                update("email", null);
+                update("emailVerified", false);
+                emailInput.value = "";
+              }}
             >
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={() => {
-                  const v = emailInput.value;
-                  if (isValidEmail(v)) {
-                    update("email", v);
-                  }
-                }}
-              >
-                save
-              </button>
-            </Show>
-            <Show when={registration.email !== null}>
-              <button
-                type="button"
-                class="btn btn-danger"
-                onClick={() => {
-                  update("email", null);
-                  update("emailVerified", false);
-                  emailInput.value = "";
-                }}
-              >
-                clear
-              </button>
-            </Show>
-          </div>
-          <div id="emailHelpBlock" class="form-text">
-            We use your email to inform you about the coming conference. We will
-            never forward it to a third party.
-          </div>
-        </Show>
+              clear
+            </button>
+          </Show>
+        </div>
+        <div id="emailHelpBlock" class="form-text">
+          We use your email to inform you about the coming conference. We will
+          never forward it to a third party.
+        </div>
       </div>
 
       <Show
@@ -178,7 +160,7 @@ const VerifyEmail = (props: { email: string }) => {
             pattern="^\d{8}$"
             class="form-control"
             id="code"
-            placeholder="12345678"
+            placeholder='e.g. "12345678"'
             ref={codeInput}
             aria-describedby="verificationCodeHelpBlock"
             required

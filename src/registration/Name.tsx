@@ -3,7 +3,7 @@ import { useRegistration } from "../context/Registration";
 const isValidName = (v?: string): v is string => /^.+$/.test(v ?? "");
 
 export const Name = () => {
-  const { update } = useRegistration();
+  const { update, registration } = useRegistration();
 
   return (
     <>
@@ -18,9 +18,10 @@ export const Name = () => {
           type="text"
           class="form-control"
           id="name"
-          placeholder="Alex Doe"
+          placeholder='e.g. "Alex Doe"'
           minLength={1}
           required
+          value={registration.name ?? ""}
           onBlur={(e) => {
             const name = e.target.value;
             if (isValidName(name)) {
@@ -37,7 +38,8 @@ export const Name = () => {
           type="text"
           class="form-control"
           id="pronouns"
-          placeholder="they/them"
+          placeholder='e.g. "they/them"'
+          value={registration.pronouns ?? ""}
           onBlur={(e) => {
             const pronouns = e.target.value;
             if (isValidName(pronouns)) {
