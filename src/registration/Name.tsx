@@ -7,7 +7,7 @@ export const Name = () => {
 
   return (
     <>
-      <div class="mb-3">
+      <div class="form-row mb-3">
         <label for="name" class="form-label">
           Your name{" "}
           <abbr title="required">
@@ -30,7 +30,7 @@ export const Name = () => {
           }}
         />
       </div>
-      <div class="mb-3">
+      <div class="form-row mb-3">
         <label for="pronouns" class="form-label">
           Your pronouns
         </label>

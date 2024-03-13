@@ -42,7 +42,7 @@ const markus: Registration = {
   publicProfile: true,
   email: "m@coderbyheart.com",
   emailVerified: true,
-  registered: false,
+  registered: true,
   name: "Markus Tacker",
   pronouns: "he/him",
   photo: new URL(

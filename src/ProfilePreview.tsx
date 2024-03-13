@@ -3,16 +3,17 @@ import { Show, type JSX } from "solid-js";
 import { Avatar } from "./icons/Avatar";
 import { GitHub, Homepage, LinkedIn } from "./LucideIcon";
 
-import "./PublicProfile.css";
 import { Mastodon } from "./icons/Mastodon";
 import { Matrix } from "./icons/Matrix";
 
-export const PublicProfile = () => {
+import "./ProfilePreview.css";
+
+export const ProfilePreview = () => {
   const { registration } = useRegistration();
   return (
     <Show when={registration.publicProfile}>
       <Show when={registration.name !== null}>
-        <aside class="profile">
+        <div class="profile-preview">
           <Show when={registration.photo !== null} fallback={<Avatar />}>
             <div class="photo">
               <img
@@ -55,7 +56,7 @@ export const PublicProfile = () => {
               icon={<GitHub />}
             />
           </dl>
-        </aside>
+        </div>
       </Show>
     </Show>
   );

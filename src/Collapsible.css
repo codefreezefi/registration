@@ -1,4 +1,9 @@
 div.collapsible header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+div.collapsible + div.collapsible {
+  border-top: 1px solid #ccc;
 }

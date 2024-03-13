@@ -5,23 +5,38 @@ import "./Collapsible.css";
 
 export const Collapsible = (props: ParentProps<{ title: string }>) => {
   const [expanded, setExpanded] = createSignal<boolean>(true);
+
   return (
-    <div class="collapsible">
-      <header>
-        <Show when={expanded()} fallback={<p>{props.title}</p>}>
-          <h2>{props.title}</h2>
-        </Show>
-        <button
-          type="button"
-          class="btn btn-link"
-          onClick={() => setExpanded((e) => !e)}
-        >
-          <Show when={expanded()} fallback={<Expand />}>
+    <Show
+      when={expanded()}
+      fallback={
+        <div class="collapsible card">
+          <header class="card-body">
+            <h2 class="card-title">{props.title}</h2>
+            <button
+              type="button"
+              class="btn btn-link"
+              onClick={() => setExpanded((e) => !e)}
+            >
+              <Expand />
+            </button>
+          </header>
+        </div>
+      }
+    >
+      <div class="collapsible card">
+        <header class="card-header">
+          <h2 class="card-title">{props.title}</h2>
+          <button
+            type="button"
+            class="btn btn-link"
+            onClick={() => setExpanded((e) => !e)}
+          >
             <Collapse />
-          </Show>
-        </button>
-      </header>
-      <Show when={expanded()}>{props.children}</Show>
-    </div>
+          </button>
+        </header>
+        <div class="card-body">{props.children}</div>
+      </div>
+    </Show>
   );
 };

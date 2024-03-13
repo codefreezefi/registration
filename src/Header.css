@@ -1,6 +1,6 @@
 .logo {
   animation: spin 60s linear infinite;
-  width: 10vh;
+  width: 100px;
   height: auto;
 }
 

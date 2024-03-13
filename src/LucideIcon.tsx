@@ -5,6 +5,7 @@ import {
   Home,
   Linkedin,
   Github,
+  Check,
 } from "lucide";
 import { For } from "solid-js";
 import { Dynamic } from "solid-js/web";

@@ -7,70 +7,53 @@ export const PublicProfile = () => {
 
   return (
     <Collapsible title="Your Profile">
-      <section class="mt-4">
-        <p>
-          Codefreeze is an Unconference which means we do not have a traditional
-          conference program with speaker profiles. Therefore we list
-          participants' profiles on{" "}
-          <a
-            href="https://codefreeze.fi/"
-            target="_blank"
-            rel="noreferrer noopener friend"
-          >
-            codefreeze.fi
-          </a>{" "}
-          so new attendees can get an impression of who to meet.
-        </p>
-        <p>
-          Please help us by providing some information about yourself below.
-        </p>
+      <p>Please help us by providing some information about yourself below.</p>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         <NoProfileCheckBox />
         <Show when={registration.publicProfile}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-          >
-            <ProfileURL
-              key="photo"
-              pattern={/^http?s:\/\/.+/}
-              placeholder="https://example.com/photo.jpeg"
-              title="A URL to your photo"
-            />
-            <ProfileURL
-              key="homepage"
-              pattern={/^http?s:\/\/.+/}
-              placeholder="https://example.com/"
-              title="Your homepage"
-            />
-            <ProfileURL
-              key="mastodon"
-              pattern={/^https:\/\/[^\/]+\/@[^\/]+/}
-              placeholder="https://mastodon.social/@alex.doe"
-              title="Your Mastodon profile"
-            />
-            <ProfileURL
-              key="linkedin"
-              pattern={/^https:\/\/www\.linkedin\.com\/in\/[^\/]+/}
-              placeholder="https://www.linkedin.com/in/alex.doe"
-              title="Your LinkedIn profile"
-            />
-            <ProfileURL
-              key="matrix"
-              pattern={/^https:\/\/matrix.to\/#\/@[^\/:]+:[^\/]/}
-              placeholder="https://matrix.to/#/@alex.doe:matrix.im"
-              title="Your Matrix profile"
-            />
-            <ProfileURL
-              key="github"
-              pattern={/^https:\/\/github\.com\/[^\/]+/}
-              placeholder="https://github.com/alex.doe"
-              title="Your GitHub profile"
-            />
-          </form>
+          <ProfileURL
+            key="photo"
+            pattern={/^http?s:\/\/.+/}
+            placeholder="https://example.com/photo.jpeg"
+            title="A URL to your photo"
+          />
+          <ProfileURL
+            key="homepage"
+            pattern={/^http?s:\/\/.+/}
+            placeholder="https://example.com/"
+            title="Your homepage"
+          />
+          <ProfileURL
+            key="mastodon"
+            pattern={/^https:\/\/[^\/]+\/@[^\/]+/}
+            placeholder="https://mastodon.social/@alex.doe"
+            title="Your Mastodon profile"
+          />
+          <ProfileURL
+            key="linkedin"
+            pattern={/^https:\/\/www\.linkedin\.com\/in\/[^\/]+/}
+            placeholder="https://www.linkedin.com/in/alex.doe"
+            title="Your LinkedIn profile"
+          />
+          <ProfileURL
+            key="matrix"
+            pattern={/^https:\/\/matrix.to\/#\/@[^\/:]+:[^\/]/}
+            placeholder="https://matrix.to/#/@alex.doe:matrix.im"
+            title="Your Matrix profile"
+          />
+          <ProfileURL
+            key="github"
+            pattern={/^https:\/\/github\.com\/[^\/]+/}
+            placeholder="https://github.com/alex.doe"
+            title="Your GitHub profile"
+          />
         </Show>
-      </section>
+      </form>
     </Collapsible>
   );
 };
@@ -83,7 +66,7 @@ const ProfileURL = (props: {
 }) => {
   const { update, registration } = useRegistration();
   return (
-    <div class="mb-3">
+    <div class="form-row mb-3">
       <label for={props.key} class="form-label">
         {props.title}
       </label>

@@ -1,40 +1,41 @@
-aside.profile {
+.profile-preview {
   color: white;
   text-align: center;
+  margin-top: 2rem;
 }
 
-aside.profile h1 {
+.profile-preview h1 {
   line-height: 100%;
   margin-bottom: 1rem;
   color: rgb(243, 247, 184);
 }
 
-aside.profile h1 small {
+.profile-preview h1 small {
   font-size: 50%;
 }
 
-aside.profile h1 small::before {
+.profile-preview h1 small::before {
   content: "( ";
   opacity: 0.5;
 }
 
-aside.profile h1 small::after {
+.profile-preview h1 small::after {
   content: " )";
   opacity: 0.5;
 }
 
-aside.profile .lucide {
+.profile-preview .lucide {
   width: 150px;
   height: 150px;
 }
 
-aside.profile .photo {
+.profile-preview .photo {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
 }
 
-aside.profile .photo img {
+.profile-preview .photo img {
   max-width: 150px;
   max-height: 150px;
   width: 100%;
@@ -42,27 +43,27 @@ aside.profile .photo img {
   border: 5px solid rgb(243, 247, 184);
 }
 
-aside.profile dl.links {
+.profile-preview dl.links {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-aside.profile dl.links a {
+.profile-preview dl.links a {
   color: white;
 }
 
-aside.profile dl.links dt {
+.profile-preview dl.links dt {
   padding-right: 0.5rem;
   display: flex;
   justify-content: end;
 }
 
-aside.profile dl.links dd {
+.profile-preview dl.links dd {
   text-align: left;
   padding-left: 0.5rem;
 }
 
-aside.profile dl.links svg {
+.profile-preview dl.links svg {
   width: 24px;
   height: 24px;
   margin-left: 0.5rem;
