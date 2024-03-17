@@ -1,4 +1,3 @@
-import { fromEnv } from "@nordicsemiconductor/from-env";
 import fs from "fs";
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";

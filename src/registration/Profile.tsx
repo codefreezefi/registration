@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Show, createSignal, batch } from "solid-js";
 import { useRegistration, type Registration } from "../context/Registration";
 import { Collapsible } from "../Collapsible";
 
@@ -15,7 +15,7 @@ export const PublicProfile = () => {
         }}
       >
         <NoProfileCheckBox />
-        <Show when={registration.publicProfile}>
+        <Show when={registration.publicProfile !== false}>
           <ProfileURL
             key="photo"
             pattern={/^http?s:\/\/.+/}
@@ -65,32 +65,47 @@ const ProfileURL = (props: {
   title: string;
 }) => {
   const { update, registration } = useRegistration();
+  const [error, setError] = createSignal<Error>();
   return (
     <div class="form-row mb-3">
       <label for={props.key} class="form-label">
         {props.title}
       </label>
-      <input
-        type="text"
-        class="form-control"
-        id={props.key}
-        placeholder={`e.g. "${props.placeholder}"`}
-        minLength={1}
-        pattern={props.pattern.toString()}
-        value={registration[props.key]?.toString() ?? ""}
-        onBlur={(e) => {
-          try {
-            const u = new URL(e.target.value);
-            if (!props.pattern.test(u.toString()))
-              throw new Error(
-                `URL ${u.toString()} does not match pattern ${props.pattern.toString()}`
-              );
-            update(props.key, u);
-          } catch (err) {
-            console.error(`[ProfileURL:${props.key}]`, err);
-          }
-        }}
-      />
+      <div>
+        <input
+          type="text"
+          class={`form-control ${error() !== undefined ? "is-invalid" : ""}`}
+          aria-describedby={error() !== undefined ? `validate${props.key}` : ""}
+          id={props.key}
+          placeholder={`e.g. "${props.placeholder}"`}
+          minLength={1}
+          pattern={props.pattern.toString()}
+          value={registration[props.key]?.toString() ?? ""}
+          onBlur={(e) => {
+            if (e.target.value.length === 0) return;
+            try {
+              const u = new URL(e.target.value);
+              if (!props.pattern.test(u.toString())) {
+                throw new Error(
+                  `URL ${u.toString()} does not match pattern ${props.pattern.toString()}`
+                );
+              }
+              batch(() => {
+                update(props.key, u);
+                setError(undefined);
+              });
+            } catch (err) {
+              console.error(`[ProfileURL:${props.key}]`, err);
+              setError(err as Error);
+            }
+          }}
+        />
+        <Show when={error() !== undefined}>
+          <span id={`validate${props.key}`} class="invalid-feedback">
+            {error()!.message}
+          </span>
+        </Show>
+      </div>
     </div>
   );
 };
@@ -104,9 +119,9 @@ const NoProfileCheckBox = () => {
         class="form-check-input"
         type="checkbox"
         id="noProfile"
-        checked={!registration.publicProfile}
+        checked={registration.publicProfile === false}
         onChange={(e) => {
-          update("publicProfile", !registration.publicProfile);
+          update("publicProfile", !(registration.publicProfile ?? true));
         }}
       />
       <label class="form-check-label" for="noProfile">

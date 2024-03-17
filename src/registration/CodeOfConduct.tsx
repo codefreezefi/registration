@@ -5,7 +5,13 @@ export const CodeOfConduct = () => {
   const { registration, update } = useRegistration();
 
   return (
-    <Collapsible title="Code of Conduct">
+    <Collapsible
+      title="Code of Conduct"
+      ok={
+        registration.codeOfConductAccepted &&
+        registration.codeOfConductInformTravelParty
+      }
+    >
       <p>
         Please review our{" "}
         <a href="https://codefreeze.fi/#code-of-conduct" target="_blank">
@@ -18,7 +24,7 @@ export const CodeOfConduct = () => {
           class="form-check-input"
           type="checkbox"
           id="acceptCodeOfConduct"
-          checked={registration.codeOfConductAccepted}
+          checked={registration.codeOfConductAccepted ?? false}
           onChange={(e) => {
             update("codeOfConductAccepted", e.currentTarget.checked);
           }}
@@ -32,7 +38,7 @@ export const CodeOfConduct = () => {
           class="form-check-input"
           type="checkbox"
           id="educateTravelParty"
-          checked={registration.codeOfConductInformTravelParty}
+          checked={registration.codeOfConductInformTravelParty ?? false}
           onChange={(e) => {
             update("codeOfConductInformTravelParty", e.currentTarget.checked);
           }}

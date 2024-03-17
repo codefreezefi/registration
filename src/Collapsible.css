@@ -7,3 +7,13 @@ div.collapsible header {
 div.collapsible + div.collapsible {
   border-top: 1px solid #ccc;
 }
+
+div.collapsible header > span {
+  display: flex;
+  align-items: center;
+}
+
+div.collapsible header > span .ok {
+  margin-left: 0.5rem;
+  color: green;
+}

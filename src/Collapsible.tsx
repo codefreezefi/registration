@@ -1,9 +1,11 @@
 import { type ParentProps, createSignal, Show } from "solid-js";
-import { Collapse, Expand } from "./LucideIcon";
+import { Collapse, Expand, OK } from "./LucideIcon";
 
 import "./Collapsible.css";
 
-export const Collapsible = (props: ParentProps<{ title: string }>) => {
+export const Collapsible = (
+  props: ParentProps<{ title: string; ok?: boolean }>
+) => {
   const [expanded, setExpanded] = createSignal<boolean>(true);
 
   return (
@@ -12,7 +14,12 @@ export const Collapsible = (props: ParentProps<{ title: string }>) => {
       fallback={
         <div class="collapsible card">
           <header class="card-body">
-            <h2 class="card-title">{props.title}</h2>
+            <span>
+              <h2 class="card-title">{props.title}</h2>
+              <Show when={props.ok ?? false}>
+                <OK class="ok" strokeWidth={4} size={30} />
+              </Show>
+            </span>
             <button
               type="button"
               class="btn btn-link"
@@ -26,7 +33,12 @@ export const Collapsible = (props: ParentProps<{ title: string }>) => {
     >
       <div class="collapsible card">
         <header class="card-header">
-          <h2 class="card-title">{props.title}</h2>
+          <span>
+            <h2 class="card-title">{props.title}</h2>
+            <Show when={props.ok ?? false}>
+              <OK class="ok" strokeWidth={4} size={30} />
+            </Show>
+          </span>
           <button
             type="button"
             class="btn btn-link"

@@ -5,7 +5,7 @@ import {
   Home,
   Linkedin,
   Github,
-  Check,
+  CircleCheckBig,
 } from "lucide";
 import { For } from "solid-js";
 import { Dynamic } from "solid-js/web";
@@ -41,6 +41,7 @@ export const LucideIcon = (
 export type LucideProps = {
   size?: number;
   strokeWidth?: number;
+  class?: string;
 };
 
 export const Expand = (props: LucideProps) => (
@@ -61,4 +62,8 @@ export const LinkedIn = (props: LucideProps) => (
 
 export const GitHub = (props: LucideProps) => (
   <LucideIcon icon={Github} {...props} />
+);
+
+export const OK = (props: LucideProps) => (
+  <LucideIcon icon={CircleCheckBig} {...props} />
 );
