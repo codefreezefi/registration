@@ -1,5 +1,5 @@
-import { Collapsible } from "../Collapsible";
-import { useRegistration } from "../context/Registration";
+import { Collapsible } from "../Collapsible.js";
+import { useRegistration } from "../context/Registration.js";
 
 const isValidName = (v?: string): v is string => /^.+$/.test(v ?? "");
 

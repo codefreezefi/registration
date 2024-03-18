@@ -1,10 +1,9 @@
-import { useRegistration } from "./context/Registration";
+import { useRegistration } from "./context/Registration.js";
 import { Show, type JSX } from "solid-js";
-import { Avatar } from "./icons/Avatar";
-import { GitHub, Homepage, LinkedIn } from "./LucideIcon";
-
-import { Mastodon } from "./icons/Mastodon";
-import { Matrix } from "./icons/Matrix";
+import { Avatar } from "./icons/Avatar.js";
+import { GitHub, Homepage, LinkedIn } from "./LucideIcon.js";
+import { Mastodon } from "./icons/Mastodon.js";
+import { Matrix } from "./icons/Matrix.js";
 
 import "./ProfilePreview.css";
 
