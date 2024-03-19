@@ -6,32 +6,44 @@ import { Progress } from "./Progress.js";
 import { VerificationCodeSent } from "./VerificationCodeSent.js";
 
 const isValidEmail = (v?: string): v is string => /^.+@.+$/.test(v ?? "");
-export const isValidCode = (v?: string): v is string => /^\d{8}$/.test(v ?? "");
+export const isValidCode = (v?: string): v is string => /^\w{6}$/.test(v ?? "");
 
 export const requestConfirmationCode = async (
   email: string
 ): Promise<{ success: boolean; email: string }> => {
-  await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-  try {
-    return { success: true, email };
-  } catch (err) {
-    console.error(err);
-    throw Error("Fail!");
+  const res = await fetch(
+    "https://bbuiajrnsyfzlalxrsrdszwljq0grppk.lambda-url.eu-north-1.on.aws/",
+    { method: "POST", body: JSON.stringify({ email }), mode: "cors" }
+  );
+  if (!res.ok) {
+    console.error(await res.text());
+    throw new Error(`Request failed!`);
   }
+  return {
+    success: true,
+    email,
+  };
 };
 
-export const verifyEmailWithCode = async (req: {
+export const verifyEmailWithCode = async ({
+  email,
+  code,
+}: {
   email: string;
   code: string;
 }): Promise<{ success: boolean; email: string }> => {
-  //if (!isValidEmail(email)) return false;
-  await new Promise<void>((resolve) => setTimeout(resolve, 250));
-  try {
-    return { success: true, email: req.email };
-  } catch (err) {
-    console.error(err);
-    throw Error("Fail!");
+  const res = await fetch(
+    "https://imfvr2kgbqnainjsnv234ebmpq0lotxr.lambda-url.eu-north-1.on.aws/",
+    { method: "POST", body: JSON.stringify({ email, code }), mode: "cors" }
+  );
+  if (!res.ok) {
+    console.error(await res.text());
+    throw new Error(`Request failed!`);
   }
+  return {
+    success: true,
+    email,
+  };
 };
 
 export const Email = () => {
@@ -154,12 +166,12 @@ export const Email = () => {
                   </label>
                   <input
                     type="text"
-                    minLength={8}
-                    maxLength={8}
-                    pattern="^\d{8}$"
+                    minLength={6}
+                    maxLength={6}
+                    pattern="^\w{6}$"
                     class="form-control"
                     id="code"
-                    placeholder='e.g. "12345678"'
+                    placeholder='e.g. "HS91UL"'
                     ref={codeInput}
                     aria-describedby="verificationCodeHelpBlock"
                     required
