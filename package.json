@@ -8,27 +8,27 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@aws-sdk/client-ses": "3.535.0",
+    "@aws-sdk/client-ses": "3.600.0",
     "@nordicsemiconductor/from-env": "3.0.1",
-    "@swc/cli": "0.3.10",
-    "@swc/core": "1.4.8",
-    "@types/aws-lambda": "8.10.136",
+    "@swc/cli": "0.3.14",
+    "@swc/core": "1.6.5",
+    "@types/aws-lambda": "8.10.140",
     "@types/glob": "8.1.0",
-    "@types/node": "20.11.29",
-    "aws-cdk": "2.133.0",
-    "aws-cdk-lib": "2.133.0",
-    "cdk": "2.133.0",
+    "@types/node": "20.14.8",
+    "aws-cdk": "2.147.0",
+    "aws-cdk-lib": "2.147.0",
+    "cdk": "2.147.0",
     "constructs": "10.3.0",
-    "glob": "10.3.10",
+    "glob": "10.4.2",
     "husky": "9.0.11",
-    "tsx": "4.7.1",
-    "typescript": "5.4.2",
-    "vite": "5.1.6",
+    "tsx": "4.15.7",
+    "typescript": "5.5.2",
+    "vite": "5.3.1",
     "vite-plugin-solid": "2.10.2",
     "yazl": "2.5.1"
   },
   "dependencies": {
     "bootstrap": "5.3.3",
-    "lucide": "0.359.0"
+    "lucide": "0.396.0"
   }
 }
