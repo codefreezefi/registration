@@ -2,11 +2,17 @@ import fs from "fs";
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 import path from "node:path";
+import { fromEnv } from "@nordicsemiconductor/from-env";
 
 const { version: defaultVersion, homepage } = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "package.json"), "utf-8")
 );
 const version = process.env.VERSION ?? defaultVersion;
+
+const { confirmEmailURL, requestTokenAPI } = fromEnv({
+  confirmEmailURL: "CONFIRM_EMAIL_API",
+  requestTokenAPI: "REQUEST_TOKEN_API",
+})(process.env);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,5 +31,7 @@ export default defineConfig({
     HOMEPAGE: JSON.stringify(homepage),
     VERSION: JSON.stringify(version ?? Date.now()),
     BUILD_TIME: JSON.stringify(new Date().toISOString()),
+    CONFIRM_EMAIL_API: JSON.stringify(confirmEmailURL),
+    REQUEST_TOKEN_API: JSON.stringify(requestTokenAPI),
   },
 });

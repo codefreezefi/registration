@@ -1,8 +1,10 @@
 import { Construct } from "constructs";
 import { Duration, aws_lambda as Lambda, aws_iam as IAM } from "aws-cdk-lib";
-import type { BackendLambdas } from "./lambdas/packBackendLambdas.ts";
-import { LambdaSource } from "./lambdas/LambdaSource.ts";
-import { LambdaLogGroup } from "./lambdas/LambdaLogGroup.ts";
+import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
+import { LambdaSource } from "./lambdas/LambdaSource.js";
+import { LambdaLogGroup } from "./lambdas/LambdaLogGroup.js";
+import type { Registrations } from "./Registrations.js";
+import type { ILayerVersion } from "aws-cdk-lib/aws-lambda";
 
 export class ConfirmEmail extends Construct {
   public readonly requestTokenURL: Lambda.IFunctionUrl;
@@ -11,8 +13,12 @@ export class ConfirmEmail extends Construct {
     parent: Construct,
     {
       lambdas,
+      registrations,
+      layer,
     }: {
       lambdas: BackendLambdas;
+      registrations: Registrations;
+      layer: ILayerVersion;
     }
   ) {
     super(parent, "confirm-email");
@@ -31,11 +37,17 @@ export class ConfirmEmail extends Construct {
         }),
       ],
       ...new LambdaLogGroup(this, "requestTokenFnLogs"),
+      environment: {
+        EMAIL_TABLE_NAME: registrations.emailTable.tableName,
+      },
+      layers: [layer],
     });
 
     this.requestTokenURL = requestTokenFn.addFunctionUrl({
       authType: Lambda.FunctionUrlAuthType.NONE,
     });
+
+    registrations.emailTable.grantReadWriteData(requestTokenFn);
 
     const confirmEmailFn = new Lambda.Function(this, "confirmEmailFn", {
       architecture: Lambda.Architecture.ARM_64,
@@ -45,10 +57,16 @@ export class ConfirmEmail extends Construct {
       handler: lambdas.confirmEmail.handler,
       code: new LambdaSource(this, lambdas.confirmEmail).code,
       ...new LambdaLogGroup(this, "confirmEmailFnLogs"),
+      environment: {
+        EMAIL_TABLE_NAME: registrations.emailTable.tableName,
+      },
+      layers: [layer],
     });
 
     this.confirmEmailURL = confirmEmailFn.addFunctionUrl({
       authType: Lambda.FunctionUrlAuthType.NONE,
     });
+
+    registrations.emailTable.grantReadData(confirmEmailFn);
   }
 }

@@ -8,13 +8,16 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@aws-sdk/client-dynamodb": "3.602.0",
     "@aws-sdk/client-ses": "3.600.0",
+    "@aws-sdk/util-dynamodb": "3.602.0",
     "@nordicsemiconductor/from-env": "3.0.1",
     "@swc/cli": "0.3.14",
     "@swc/core": "1.6.5",
     "@types/aws-lambda": "8.10.140",
     "@types/glob": "8.1.0",
     "@types/node": "20.14.8",
+    "@types/yazl": "2.4.5",
     "aws-cdk": "2.147.0",
     "aws-cdk-lib": "2.147.0",
     "cdk": "2.147.0",

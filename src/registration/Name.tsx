@@ -7,13 +7,7 @@ export const Name = () => {
   const { update, registration } = useRegistration();
 
   return (
-    <Collapsible
-      title="Your Details"
-      ok={
-        (registration.name?.length ?? 0) > 0 &&
-        (registration.pronouns?.length ?? 0) > 0
-      }
-    >
+    <Collapsible title="Your Details" ok={(registration.name?.length ?? 0) > 0}>
       <form
         onSubmit={(ev) => {
           ev.preventDefault();
@@ -32,6 +26,7 @@ export const Name = () => {
             class="form-control"
             id="name"
             placeholder='e.g. "Alex Doe"'
+            autocomplete="name"
             minLength={1}
             required
             value={registration.name ?? ""}
@@ -51,6 +46,7 @@ export const Name = () => {
             type="text"
             class="form-control"
             id="pronouns"
+            autocomplete="pronouns"
             placeholder='e.g. "they/them"'
             value={registration.pronouns ?? ""}
             onBlur={(e) => {
