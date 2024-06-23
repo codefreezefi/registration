@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 
 export class Registrations extends Construct {
   public readonly registrationsTable: DynamoDB.Table;
-  public readonly emailTable: DynamoDB.Table;
+  public readonly emailsTable: DynamoDB.Table;
   public constructor(parent: Construct) {
     super(parent, "Registrations");
 
@@ -17,7 +17,7 @@ export class Registrations extends Construct {
       pointInTimeRecovery: true,
     });
 
-    this.emailTable = new DynamoDB.Table(this, "emails", {
+    this.emailsTable = new DynamoDB.Table(this, "emails", {
       billingMode: DynamoDB.BillingMode.PAY_PER_REQUEST,
       partitionKey: {
         name: "email",

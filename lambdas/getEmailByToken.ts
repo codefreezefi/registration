@@ -10,7 +10,7 @@ export const getEmailByToken =
   }: {
     email: string;
     code: string;
-  }): Promise<{ error: Error } | { email: string }> => {
+  }): Promise<{ error: Error } | { email: string; name: string }> => {
     try {
       const { Item } = await db.send(
         new GetItemCommand({
@@ -28,7 +28,7 @@ export const getEmailByToken =
         return { error: new Error("Invalid code") };
       }
 
-      return { email: item.email };
+      return { email: item.email, name: item.name };
     } catch (error) {
       console.error(error);
       return { error: new InternalError() };

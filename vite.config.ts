@@ -9,9 +9,10 @@ const { version: defaultVersion, homepage } = JSON.parse(
 );
 const version = process.env.VERSION ?? defaultVersion;
 
-const { confirmEmailURL, requestTokenAPI } = fromEnv({
+const { confirmEmailURL, requestTokenAPI, registerAPI } = fromEnv({
   confirmEmailURL: "CONFIRM_EMAIL_API",
   requestTokenAPI: "REQUEST_TOKEN_API",
+  registerAPI: "REGISTER_API",
 })(process.env);
 
 // https://vitejs.dev/config/
@@ -33,5 +34,6 @@ export default defineConfig({
     BUILD_TIME: JSON.stringify(new Date().toISOString()),
     CONFIRM_EMAIL_API: JSON.stringify(confirmEmailURL),
     REQUEST_TOKEN_API: JSON.stringify(requestTokenAPI),
+    REGISTER_API: JSON.stringify(registerAPI),
   },
 });

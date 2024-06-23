@@ -91,8 +91,7 @@ const RegistrationSuccessfull = () => {
           <p>
             Thank you for registering as a participant of Codefreeze{" "}
             {Codefreeze.start.getFullYear()}.<br />
-            Your registration ID is <code>{registration.id}</code>.<br />
-            Please check your email for further information.
+            Your registration ID is <code>{registration.id}</code>.
           </p>
           <Contact />
         </div>

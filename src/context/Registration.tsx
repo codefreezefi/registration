@@ -7,6 +7,7 @@ export type Registration = {
   codeOfConductInformTravelParty?: boolean;
   publicProfile?: boolean;
   email?: string;
+  code?: string;
   emailVerified?: boolean;
   name?: string;
   pronouns?: string;

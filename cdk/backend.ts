@@ -5,6 +5,7 @@ import type pJson from "../package.json";
 
 const dependencies: Array<keyof (typeof pJson)["devDependencies"]> = [
   "@nordicsemiconductor/from-env",
+  "id128",
 ];
 
 new BackendApp("registration", {

@@ -38,7 +38,7 @@ export class ConfirmEmail extends Construct {
       ],
       ...new LambdaLogGroup(this, "requestTokenFnLogs"),
       environment: {
-        EMAIL_TABLE_NAME: registrations.emailTable.tableName,
+        EMAILS_TABLE_NAME: registrations.emailsTable.tableName,
       },
       layers: [layer],
     });
@@ -47,7 +47,7 @@ export class ConfirmEmail extends Construct {
       authType: Lambda.FunctionUrlAuthType.NONE,
     });
 
-    registrations.emailTable.grantReadWriteData(requestTokenFn);
+    registrations.emailsTable.grantReadWriteData(requestTokenFn);
 
     const confirmEmailFn = new Lambda.Function(this, "confirmEmailFn", {
       architecture: Lambda.Architecture.ARM_64,
@@ -58,7 +58,7 @@ export class ConfirmEmail extends Construct {
       code: new LambdaSource(this, lambdas.confirmEmail).code,
       ...new LambdaLogGroup(this, "confirmEmailFnLogs"),
       environment: {
-        EMAIL_TABLE_NAME: registrations.emailTable.tableName,
+        EMAILS_TABLE_NAME: registrations.emailsTable.tableName,
       },
       layers: [layer],
     });
@@ -67,6 +67,6 @@ export class ConfirmEmail extends Construct {
       authType: Lambda.FunctionUrlAuthType.NONE,
     });
 
-    registrations.emailTable.grantReadData(confirmEmailFn);
+    registrations.emailsTable.grantReadData(confirmEmailFn);
   }
 }

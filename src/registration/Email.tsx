@@ -1,10 +1,4 @@
-import {
-  ErrorBoundary,
-  Show,
-  createEffect,
-  createResource,
-  createSignal,
-} from "solid-js";
+import { Show, createEffect, createResource, createSignal } from "solid-js";
 import { Collapsible } from "../Collapsible.js";
 import { Row } from "../Row.js";
 import { useRegistration } from "../context/Registration.js";
@@ -23,10 +17,10 @@ export const requestConfirmationCode = async ({
 }): Promise<{ success: boolean; email: string }> => {
   const res = await fetch(REQUEST_TOKEN_API, {
     method: "POST",
+    mode: "cors",
     body: JSON.stringify({ email, name }),
   });
   if (!res.ok) {
-    console.error(await res.text());
     return {
       success: false,
       email,
@@ -47,10 +41,10 @@ export const verifyEmailWithCode = async ({
 }): Promise<{ success: boolean; email: string }> => {
   const res = await fetch(CONFIRM_EMAIL_API, {
     method: "POST",
+    mode: "cors",
     body: JSON.stringify({ email, code }),
   });
   if (!res.ok) {
-    console.error(await res.text());
     return {
       success: false,
       email,
@@ -166,7 +160,6 @@ export const Email = () => {
             <Show when={verificationRequestedForEmail.loading}>
               <Progress title="Sending verification code ..." />
             </Show>
-
             <Show when={!emailVerified()}>
               <Show
                 when={
@@ -202,6 +195,7 @@ export const Email = () => {
                           code: v,
                           email: registration.email!,
                         });
+                        update("code", v);
                       }
                     }}
                   />

@@ -4,6 +4,7 @@ import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
 import { Registrations } from "./Registrations.js";
 import type { PackedLayer } from "./lambdas/packLayer.js";
 import { LambdaSource } from "./lambdas/LambdaSource.js";
+import { Register } from "./Register.ts";
 
 export class BackendStack extends Stack {
   public constructor(
@@ -35,6 +36,12 @@ export class BackendStack extends Stack {
       layer,
     });
 
+    const register = new Register(this, {
+      lambdas,
+      registrations,
+      layer,
+    });
+
     new CfnOutput(this, "requestTokenAPI", {
       value: confirmEmail.requestTokenURL.url,
       exportName: `${this.stackName}:requestTokenAPI`,
@@ -43,6 +50,11 @@ export class BackendStack extends Stack {
     new CfnOutput(this, "confirmEmailURL", {
       value: confirmEmail.confirmEmailURL.url,
       exportName: `${this.stackName}:confirmEmailURL`,
+    });
+
+    new CfnOutput(this, "registerURL", {
+      value: register.registerURL.url,
+      exportName: `${this.stackName}:registerURL`,
     });
   }
 }

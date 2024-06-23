@@ -10,9 +10,11 @@ export const registerEmailToken =
   ({ db, TableName }: { db: DynamoDBClient; TableName: string }) =>
   async ({
     email,
+    name,
     code,
   }: {
     email: string;
+    name: string;
     code: string;
   }): Promise<{ error: Error } | { success: true }> => {
     try {
@@ -29,17 +31,21 @@ export const registerEmailToken =
             },
           },
           UpdateExpression:
-            "SET #code = :code, #ttl = :ttl, #rerequestAfter = :rerequestAfter",
+            "SET #code = :code, #ttl = :ttl, #rerequestAfter = :rerequestAfter, #name = :name",
           ConditionExpression:
             "attribute_not_exists(email) OR #ttl < :now OR #rerequestAfter < :now",
           ExpressionAttributeNames: {
             "#code": "code",
             "#ttl": "ttl",
             "#rerequestAfter": "rerequestAfter",
+            "#name": "name",
           },
           ExpressionAttributeValues: {
             ":code": {
               S: code,
+            },
+            ":name": {
+              S: name,
             },
             ":ttl": {
               N: `${Math.floor(expires.getTime() / 1000)}`,

@@ -1,18 +1,28 @@
 import { useRegistration, type Registration } from "../context/Registration.js";
 import { Show, createSignal, createResource, createEffect } from "solid-js";
-import { generateCode } from "./code.js";
 import { Progress } from "./Progress.js";
 
 export const register = async (
   registration: Registration
-): Promise<{ id: string }> => {
-  await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-  try {
-    return { id: generateCode() };
-  } catch (err) {
-    console.error(err);
-    throw Error("Fail!");
+): Promise<
+  { success: false; id: undefined } | { success: true; id: string }
+> => {
+  const res = await fetch(REGISTER_API, {
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(registration),
+  });
+  if (!res.ok) {
+    console.error(await res.text());
+    return {
+      success: false,
+      id: undefined,
+    };
   }
+  return {
+    success: true,
+    id: (await res.json()).id,
+  };
 };
 
 export const Submit = () => {
@@ -31,8 +41,9 @@ export const Submit = () => {
   const [submittedRegistration] = createResource(registrationData, register);
 
   createEffect(() => {
-    if (submittedRegistration()?.id !== undefined) {
-      update("id", submittedRegistration()!.id);
+    const id = submittedRegistration()?.id;
+    if (id !== undefined) {
+      update("id", id);
     }
   });
 

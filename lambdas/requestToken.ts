@@ -14,7 +14,7 @@ const ses = new SESClient({});
 const db = new DynamoDBClient({});
 
 const { TableName } = fromEnv({
-  TableName: "EMAIL_TABLE_NAME",
+  TableName: "EMAILS_TABLE_NAME",
 })(process.env);
 
 const emailRepo = registerEmailToken({ db, TableName });
@@ -37,7 +37,7 @@ export const handler = async (
 
   const code = generateCode();
 
-  const maybeNewRequest = await emailRepo({ email, code });
+  const maybeNewRequest = await emailRepo({ email, code, name });
 
   if ("error" in maybeNewRequest) {
     if (error instanceof ConflictError) {
@@ -57,6 +57,7 @@ export const handler = async (
       Destination: {
         ToAddresses: [`"${name}" <${email}>`],
       },
+      ReplyToAddresses: [`"Markus Tacker" <m@coderbyheart.com>`],
       Message: {
         Body: {
           Text: {
