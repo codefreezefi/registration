@@ -5,7 +5,6 @@ import { useRegistration } from "./context/Registration.js";
 import { Show } from "solid-js";
 import { ProfilePreview } from "./ProfilePreview.js";
 import { Row } from "./Row.js";
-import { SharedExpenses } from "./SharedExpenses.js";
 import { Name } from "./registration/Name.js";
 import { Email } from "./registration/Email.js";
 import { Submit } from "./registration/Submit.js";
@@ -47,14 +46,7 @@ export const Registration = () => {
                 so you profile can be shown on codefreeze.fi.
               </li>
             </ul>
-            <p>We inform you also about</p>
-            <ul>
-              <li>
-                Community expenses of 20 &euro; that we expect every participant
-                to pay.
-              </li>
-              <li>How to book the hotel.</li>
-            </ul>
+            <p>We inform you also about how to book the hotel.</p>
             <h2>What this registration is NOT:</h2>
             <p>
               This registration does not book the hotel or arranges your travel.
@@ -79,9 +71,6 @@ export const Registration = () => {
         }
       >
         <PublicProfile />
-      </Row>
-      <Row>
-        <SharedExpenses />
       </Row>
       <Row>
         <Submit />
