@@ -70,7 +70,7 @@ export const Email = () => {
   const [code, setCode] = createSignal<{ email: string; code: string }>();
   const [emailVerified] = createResource(code, verifyEmailWithCode);
   createEffect(() => {
-    if (emailVerified()) {
+    if (emailVerified()?.success === true) {
       update("emailVerified", true);
     }
   });
@@ -97,7 +97,11 @@ export const Email = () => {
             </Show>
             <Show when={verificationRequestedForEmail()?.success === false}>
               <div class="alert alert-danger mt-2" role="alert">
-                <p>Failed to sent verification code.</p>
+                <p>
+                  Failed to sent verification code.
+                  <br />
+                  Please wait 5 minutes between requesting confirmation codes.
+                </p>
               </div>
             </Show>
           </>
@@ -139,13 +143,14 @@ export const Email = () => {
                       update("email", v);
                     }
                   }}
+                  disabled={registration.name === undefined}
                 >
                   request confirmation code
                 </button>
                 <Show when={registration.email !== undefined}>
                   <button
                     type="button"
-                    class="btn btn-outline-danger"
+                    class="btn btn-outline-danger ms-1"
                     onClick={() => {
                       update("email", undefined);
                       update("emailVerified", false);
@@ -160,50 +165,56 @@ export const Email = () => {
             <Show when={verificationRequestedForEmail.loading}>
               <Progress title="Sending verification code ..." />
             </Show>
-            <Show when={!emailVerified()}>
-              <Show
-                when={
-                  registration.email !== undefined &&
-                  verificationRequestedForEmail()?.email ===
-                    registration.email &&
-                  registration.emailVerified !== true &&
-                  !emailVerified.loading
-                }
-              >
-                <div class="form-row mb-3">
-                  <label for="code" class="form-label">
-                    Verification code{" "}
-                    <abbr title="required">
-                      <small>*</small>
-                    </abbr>
-                  </label>
-                  <input
-                    type="text"
-                    minLength={6}
-                    maxLength={6}
-                    pattern="^\w{6}$"
-                    class="form-control"
-                    id="code"
-                    placeholder='e.g. "HS91UL"'
-                    ref={codeInput}
-                    aria-describedby="verificationCodeHelpBlock"
-                    required
-                    onkeyup={(e) => {
-                      const v = e.currentTarget.value;
-                      if (isValidCode(v)) {
-                        setCode({
-                          code: v,
-                          email: registration.email!,
-                        });
-                        update("code", v);
-                      }
-                    }}
-                  />
-                </div>
-              </Show>
-              <Show when={emailVerified.loading && !emailVerified.error}>
-                <Progress title="Verifying code..." />
-              </Show>
+            <div class="form-row mb-3">
+              <label for="code" class="form-label">
+                Verification code{" "}
+                <abbr title="required">
+                  <small>*</small>
+                </abbr>
+              </label>
+              <div>
+                <input
+                  type="text"
+                  minLength={6}
+                  maxLength={6}
+                  pattern="^\w{6}$"
+                  class="form-control"
+                  id="code"
+                  placeholder='e.g. "HS91UL"'
+                  ref={codeInput}
+                  aria-describedby="verificationCodeHelpBlock"
+                  required
+                  onkeyup={(e) => {
+                    const v = e.currentTarget.value;
+                    if (isValidCode(v)) {
+                      setCode({
+                        code: v,
+                        email: registration.email!,
+                      });
+                      update("code", v);
+                    }
+                  }}
+                />
+                <button
+                  type="button"
+                  class="btn btn-primary mt-1"
+                  onClick={() => {
+                    const v = codeInput.value;
+                    if (isValidCode(v)) {
+                      setCode({
+                        code: v,
+                        email: registration.email!,
+                      });
+                    }
+                  }}
+                  disabled={registration.email === undefined}
+                >
+                  confirm
+                </button>
+              </div>
+            </div>
+            <Show when={emailVerified.loading && !emailVerified.error}>
+              <Progress title="Verifying code..." />
             </Show>
           </form>
         </Collapsible>
