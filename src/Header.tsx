@@ -3,10 +3,6 @@ import { Codefreeze } from "./codefreeze.js";
 
 import "./Header.css";
 
-const dateFormat = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "full",
-});
-
 export const Header = () => (
   <header class="main">
     <h1>
@@ -17,11 +13,14 @@ export const Header = () => (
     <Logo class="logo" />
 
     <p>
-      {dateFormat.format(Codefreeze.start)}
-      &mdash;
+      Sat {Codefreeze.start.getDate()}. &mdash; Sat {Codefreeze.end.getDate()}.
       <br />
-      {dateFormat.format(Codefreeze.end)}
+      January {Codefreeze.end.getFullYear()}
     </p>
-    <p>Kiilopää, Inari, Finland</p>
+    <p>
+      Kiilopää
+      <br />
+      Finland
+    </p>
   </header>
 );

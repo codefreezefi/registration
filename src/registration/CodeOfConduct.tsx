@@ -48,6 +48,10 @@ export const CodeOfConduct = () => {
           the Code of Conduct.
         </label>
       </div>
+      <p class="mt-3 mt-0">
+        We required all participants to follow our Code of Conduct to ensure
+        Codefreeze is a safe and inclusive environment.
+      </p>
     </Collapsible>
   );
 };

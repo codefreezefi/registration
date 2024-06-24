@@ -7,7 +7,7 @@ export const AfterRegistration = () => (
         <h2 class="card-title">After the registration</h2>
       </div>
       <div class="card-body">
-        <ul>
+        <ul class="ms-0 ps-3">
           <li>
             Book your stay by email (remember to mention <code>Codefreeze</code>
             ; see{" "}

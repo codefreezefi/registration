@@ -57,23 +57,23 @@ export const Submit = () => {
           when={isValid()}
           fallback={
             <>
-              <p>Please complete the registration first!</p>
+              <p>Please complete the registration first</p>
               <ol>
                 <Show when={!isCodeOfConductAccepted()}>
                   <li>
                     <a href="#code-of-conduct">
-                      Please accept our Code of Conduct!
+                      Please accept our Code of Conduct
                     </a>
                   </li>
                 </Show>
                 <Show when={!isValidName()}>
                   <li>
-                    <a href="#details">Please provide your name!</a>
+                    <a href="#details">Please provide your name</a>
                   </li>
                 </Show>
                 <Show when={!isValidEmail()}>
                   <li>
-                    <a href="#email">Please verify your email!</a>
+                    <a href="#email">Please verify your email</a>
                   </li>
                 </Show>
               </ol>
@@ -81,7 +81,7 @@ export const Submit = () => {
           }
         >
           <p>
-            You are now ready to submit your application. If you change your
+            You are now ready to submit your registration. If you change your
             mind later, just contact us.
           </p>
         </Show>

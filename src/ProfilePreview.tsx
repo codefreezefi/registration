@@ -13,19 +13,6 @@ export const ProfilePreview = () => {
     <Show when={registration.name !== undefined}>
       <aside class="mt-4">
         <h2>Preview</h2>
-        <p>
-          Codefreeze is an Unconference which means we do not have a traditional
-          conference program with speaker profiles. Therefore we list
-          participants' profiles on{" "}
-          <a
-            href="https://codefreeze.fi/"
-            target="_blank"
-            rel="noreferrer noopener friend"
-          >
-            codefreeze.fi
-          </a>{" "}
-          so new attendees can get an impression of who to meet.
-        </p>
         <p>Below is a preview of your public profile:</p>
         <div class="profile-preview">
           <Show when={registration.photo !== undefined} fallback={<Avatar />}>

@@ -26,32 +26,35 @@ export const Registration = () => {
               Please complete this form to register for Codefreeze{" "}
               {Codefreeze.start.getFullYear()}.
             </p>
-            <h2>What this registration is used for:</h2>
-            <p>In this registration form we collect this information:</p>
-            <ul>
-              <li>
-                That you have read and understood our Code of Conduct:
-                <br />
-                to ensure Codefreeze is a safe and inclusive environment.
-              </li>
-              <li>
-                Details about you (name, pronouns, email):
-                <br />
-                to be able to contact you with important information related to
-                the conference and your participation.
-              </li>
-              <li>
-                Optionally a photo and links to your social media profile:
-                <br />
-                so you profile can be shown on codefreeze.fi.
-              </li>
-            </ul>
-            <p>We inform you also about how to book the hotel.</p>
+            <h2>Why should you register?</h2>
+            <p>
+              We would like to have your contact information so we are able to
+              contact you with important information related to the conference
+              and your participation.
+            </p>
+            <p>
+              You can optionally set up a participant profile to be featured on
+              our homepage, so other can easily get in touch with you.
+            </p>
+            <p>
+              Codefreeze is an Unconference which means we do not have a
+              traditional conference program with speaker profiles. Therefore we
+              list participants' profiles on{" "}
+              <a
+                href="https://codefreeze.fi/"
+                target="_blank"
+                rel="noreferrer noopener friend"
+              >
+                codefreeze.fi
+              </a>{" "}
+              so new attendees can get an impression of who to meet.
+            </p>
             <h2>What this registration is NOT:</h2>
             <p>
               This registration does not book the hotel or arranges your travel.
               You need to do this yourself.
             </p>
+            <h2>Do you have more questions?</h2>
             <Contact />
           </div>
         </div>
