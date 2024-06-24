@@ -82,7 +82,7 @@ export const Email = () => {
         aside={
           <>
             <Show when={registration.emailVerified}>
-              <div class="alert alert-success">
+              <div class="alert alert-success mt-xs-1 mt-sm-0">
                 <p>Email verified.</p>
               </div>
             </Show>

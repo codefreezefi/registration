@@ -94,7 +94,7 @@ export const Submit = () => {
           type="button"
           class="btn btn-primary"
           disabled={!isValid()}
-          onClick={() => submitRegistration(registration)}
+          onClick={() => submitRegistration({ ...registration })}
         >
           submit
         </button>

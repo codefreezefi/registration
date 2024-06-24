@@ -67,8 +67,8 @@ const ProfileURL = (props: {
   const { update, registration } = useRegistration();
   const [error, setError] = createSignal<Error>();
   return (
-    <div class="form-row mb-3">
-      <label for={props.key} class="form-label">
+    <div class="form-row mb-lg-3">
+      <label for={props.key} class="form-label mb-0 mb-lg-1">
         {props.title}
       </label>
       <div>
@@ -114,7 +114,7 @@ const NoProfileCheckBox = () => {
   const { registration, update } = useRegistration();
 
   return (
-    <div class="form-check mb-3">
+    <div class="form-check mb-lg-3">
       <input
         class="form-check-input"
         type="checkbox"

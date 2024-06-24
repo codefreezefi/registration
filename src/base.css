@@ -44,10 +44,12 @@ h1 {
   margin: 0.55rem 0;
 }
 
-form > div.form-row {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  justify-content: start;
+@media screen and (min-width: 960px) {
+  form > div.form-row {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-content: start;
+  }
 }
 
 form > div.form-row label {
