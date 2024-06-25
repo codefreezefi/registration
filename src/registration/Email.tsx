@@ -210,6 +210,7 @@ export const Email = () => {
                           code: v,
                           email: registration.email!,
                         });
+                        update("code", v);
                       }
                     }}
                     disabled={registration.email === undefined}
