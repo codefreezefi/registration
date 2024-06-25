@@ -15,6 +15,7 @@ export class Registrations extends Construct {
       },
       removalPolicy: RemovalPolicy.RETAIN,
       pointInTimeRecovery: true,
+      stream: DynamoDB.StreamViewType.NEW_IMAGE,
     });
 
     this.emailsTable = new DynamoDB.Table(this, "emails", {
