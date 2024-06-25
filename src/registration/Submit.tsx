@@ -73,7 +73,7 @@ export const Submit = () => {
                 </Show>
                 <Show when={!isValidEmail()}>
                   <li>
-                    <a href="#email">Please verify your email</a>
+                    <a href="#email-form">Please verify your email</a>
                   </li>
                 </Show>
               </ol>

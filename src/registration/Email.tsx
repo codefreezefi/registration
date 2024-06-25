@@ -78,7 +78,7 @@ export const Email = () => {
   return (
     <>
       <Row
-        id="email"
+        id="email-form"
         aside={
           <>
             <Show when={registration.emailVerified}>
