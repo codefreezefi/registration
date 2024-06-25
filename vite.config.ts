@@ -15,6 +15,8 @@ const { confirmEmailURL, requestTokenAPI, registerAPI } = fromEnv({
   registerAPI: "REGISTER_API",
 })(process.env);
 
+const sentryDSN = process.env.SENTRY_DSN ?? "";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [solidPlugin()],
@@ -35,5 +37,6 @@ export default defineConfig({
     CONFIRM_EMAIL_API: JSON.stringify(confirmEmailURL),
     REQUEST_TOKEN_API: JSON.stringify(requestTokenAPI),
     REGISTER_API: JSON.stringify(registerAPI),
+    SENTRY_DSN: JSON.stringify(sentryDSN),
   },
 });

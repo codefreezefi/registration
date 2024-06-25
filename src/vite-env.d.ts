@@ -11,6 +11,8 @@ declare const REQUEST_TOKEN_API: string;
 declare const CONFIRM_EMAIL_API: string;
 // API to submit a registration
 declare const REGISTER_API: string;
+// Sentry DSN
+declare const SENTRY_DSN: string;
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;

@@ -9,6 +9,7 @@ env:
   CONFIRM_EMAIL_API: https://imfvr2kgbqnainjsnv234ebmpq0lotxr.lambda-url.eu-north-1.on.aws/
   REQUEST_TOKEN_API: https://bbuiajrnsyfzlalxrsrdszwljq0grppk.lambda-url.eu-north-1.on.aws/
   REGISTER_API: https://o5o3zpj7ajaxdscspskkezdwte0ioduk.lambda-url.eu-north-1.on.aws/
+  SENTRY_DSN: https://7fb29947853da3055c66dbb7991ca97b@o4507491821879296.ingest.de.sentry.io/4507491826925648
 
 jobs:
   build:
