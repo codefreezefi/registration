@@ -28,7 +28,7 @@ export const AfterRegistration = () => (
             ).
           </li>
           <li>
-            Join our Matrix{" "}
+            Join our{" "}
             <a href="https://codefreeze.fi/chat" target="_blank">
               Matrix channel
             </a>{" "}
