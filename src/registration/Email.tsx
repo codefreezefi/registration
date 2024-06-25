@@ -134,27 +134,31 @@ export const Email = () => {
                   We use your email to inform you about the coming conference.
                   We will never forward it to a third party.
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  onClick={() => {
-                    const v = emailInput.value;
-                    if (isValidEmail(v)) {
-                      update("email", v);
-                    }
-                  }}
-                  disabled={registration.name === undefined}
-                >
-                  request confirmation code
-                </button>
+                <Show when={(registration.emailVerified ?? false) === false}>
+                  <button
+                    type="button"
+                    class="btn btn-primary me-1"
+                    onClick={() => {
+                      const v = emailInput.value;
+                      if (isValidEmail(v)) {
+                        update("email", v);
+                      }
+                    }}
+                    disabled={registration.name === undefined}
+                  >
+                    request confirmation code
+                  </button>
+                </Show>
                 <Show when={registration.email !== undefined}>
                   <button
                     type="button"
-                    class="btn btn-outline-danger ms-1"
+                    class="btn btn-outline-danger"
                     onClick={() => {
                       update("email", undefined);
                       update("emailVerified", false);
+                      update("code", undefined);
                       emailInput.value = "";
+                      codeInput.value = "";
                     }}
                   >
                     clear
@@ -165,54 +169,57 @@ export const Email = () => {
             <Show when={verificationRequestedForEmail.loading}>
               <Progress title="Sending verification code ..." />
             </Show>
-            <div class="form-row mb-3">
-              <label for="code" class="form-label">
-                Verification code{" "}
-                <abbr title="required">
-                  <small>*</small>
-                </abbr>
-              </label>
-              <div>
-                <input
-                  type="text"
-                  minLength={6}
-                  maxLength={6}
-                  pattern="^\w{6}$"
-                  class="form-control"
-                  id="code"
-                  placeholder='e.g. "HS91UL"'
-                  ref={codeInput}
-                  aria-describedby="verificationCodeHelpBlock"
-                  required
-                  onkeyup={(e) => {
-                    const v = e.currentTarget.value;
-                    if (isValidCode(v)) {
-                      setCode({
-                        code: v,
-                        email: registration.email!,
-                      });
-                      update("code", v);
-                    }
-                  }}
-                />
-                <button
-                  type="button"
-                  class="btn btn-primary mt-1"
-                  onClick={() => {
-                    const v = codeInput.value;
-                    if (isValidCode(v)) {
-                      setCode({
-                        code: v,
-                        email: registration.email!,
-                      });
-                    }
-                  }}
-                  disabled={registration.email === undefined}
-                >
-                  confirm
-                </button>
+            <Show when={(registration.emailVerified ?? false) === false}>
+              <div class="form-row mb-3">
+                <label for="code" class="form-label">
+                  Verification code{" "}
+                  <abbr title="required">
+                    <small>*</small>
+                  </abbr>
+                </label>
+                <div>
+                  <input
+                    type="text"
+                    minLength={6}
+                    maxLength={6}
+                    pattern="^\w{6}$"
+                    class="form-control"
+                    id="code"
+                    placeholder='e.g. "HS91UL"'
+                    ref={codeInput}
+                    aria-describedby="verificationCodeHelpBlock"
+                    required
+                    onkeyup={(e) => {
+                      const v = e.currentTarget.value;
+                      if (isValidCode(v)) {
+                        setCode({
+                          code: v,
+                          email: registration.email!,
+                        });
+                        update("code", v);
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-1"
+                    onClick={() => {
+                      const v = codeInput.value;
+                      if (isValidCode(v)) {
+                        setCode({
+                          code: v,
+                          email: registration.email!,
+                        });
+                      }
+                    }}
+                    disabled={registration.email === undefined}
+                  >
+                    confirm
+                  </button>
+                </div>
               </div>
-            </div>
+            </Show>
+
             <Show when={emailVerified.loading && !emailVerified.error}>
               <Progress title="Verifying code..." />
             </Show>
