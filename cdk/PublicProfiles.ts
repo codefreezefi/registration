@@ -125,5 +125,33 @@ export class PublicProfiles extends Construct {
     });
 
     registrations.registrationsTable.grantReadData(listPublicProfilesFn);
+
+    // Send notification when profile is published
+    const onPublish = new Lambda.Function(this, "onPublishFn", {
+      architecture: Lambda.Architecture.ARM_64,
+      runtime: Lambda.Runtime.NODEJS_20_X,
+      timeout: Duration.seconds(10),
+      memorySize: 1792,
+      handler: lambdas.onPublish.handler,
+      code: new LambdaSource(this, lambdas.onPublish).code,
+      ...new LambdaLogGroup(this, "onPublishFnLogs"),
+      environment: {
+        REGISTRATIONS_TABLE_NAME: registrations.registrationsTable.tableName,
+        IMAGES_BUCKET_NAME: imagesBucket.bucketName,
+      },
+      layers: [layer],
+      initialPolicy: [
+        new IAM.PolicyStatement({
+          actions: ["ses:SendEmail"],
+          resources: ["*"],
+        }),
+      ],
+    });
+
+    onPublish.addEventSource(
+      new EventSources.DynamoEventSource(registrations.registrationsTable, {
+        startingPosition: Lambda.StartingPosition.LATEST,
+      })
+    );
   }
 }

@@ -6,6 +6,7 @@ export type BackendLambdas = {
   register: PackedLambda;
   generateThumbnail: PackedLambda;
   listPublicProfiles: PackedLambda;
+  onPublish: PackedLambda;
 };
 
 export const packBackendLambdas = async (): Promise<BackendLambdas> => ({
@@ -14,4 +15,5 @@ export const packBackendLambdas = async (): Promise<BackendLambdas> => ({
   register: await packLambdaFromPath("register"),
   generateThumbnail: await packLambdaFromPath("generateThumbnail"),
   listPublicProfiles: await packLambdaFromPath("listPublicProfiles"),
+  onPublish: await packLambdaFromPath("onPublish"),
 });

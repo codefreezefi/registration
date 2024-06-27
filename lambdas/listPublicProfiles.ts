@@ -37,7 +37,8 @@ export const handler = async (
         ExpressionAttributeValues: {
           ":codefreeze": {
             N: parseInt(
-              event.queryStringParameters?.codefreeze ?? "2025",
+              event.queryStringParameters?.codefreeze ??
+                new Date().getFullYear().toString(),
               10
             ).toString(),
           },

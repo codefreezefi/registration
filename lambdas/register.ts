@@ -9,6 +9,7 @@ import { fromEnv } from "@nordicsemiconductor/from-env";
 import id128 from "id128";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { CC, From } from "./emails.ts";
 
 const { EmailsTableName, RegistrationsTableName } = fromEnv({
   EmailsTableName: "EMAILS_TABLE_NAME",
@@ -60,9 +61,9 @@ export const handler = async (
     new SendEmailCommand({
       Destination: {
         ToAddresses: [`"${maybeVerifiedEmail.name}" <${email}>`],
-        CcAddresses: [`"Markus Tacker" <m@coderbyheart.com>`],
+        CcAddresses: CC,
       },
-      ReplyToAddresses: [`"Markus Tacker" <m@coderbyheart.com>`],
+      ReplyToAddresses: CC,
       Message: {
         Body: {
           Text: {
@@ -70,14 +71,15 @@ export const handler = async (
               `Hei ${maybeVerifiedEmail.name},\nthank you for registering for Codefreeze.`,
               `Your registration ID is ${id}.`,
               `Please do no hesitate to reach out to us if you have any questions.`,
-            ].join("\n"),
+              `❄`,
+            ].join("\n\n"),
           },
         },
         Subject: {
           Data: `[codefreeze.fi] Your registration ${id}`,
         },
       },
-      Source: "notification@codefreeze.fi",
+      Source: From,
     })
   );
 
