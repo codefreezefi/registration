@@ -11,13 +11,13 @@ const { RegistrationsTableName, publicProfilesByCodefreezeIndexName } = fromEnv(
     RegistrationsTableName: "REGISTRATIONS_TABLE_NAME",
     publicProfilesByCodefreezeIndexName:
       "PUBLIC_PROFILES_BY_CODEFREEZE_INDEX_NAME",
-  }
+  },
 )(process.env);
 
 const db = new DynamoDBClient({});
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+  event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
   console.log(JSON.stringify({ event }));
 
@@ -39,11 +39,11 @@ export const handler = async (
             N: parseInt(
               event.queryStringParameters?.codefreeze ??
                 new Date().getFullYear().toString(),
-              10
+              10,
             ).toString(),
           },
         },
-      })
+      }),
     );
 
     return {
@@ -79,8 +79,8 @@ export const handler = async (
                   name,
                   photoThumbnail,
                   pronouns,
-                }
-        )
+                },
+        ),
       ),
     };
   } catch (err) {

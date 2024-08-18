@@ -28,7 +28,7 @@ export class PublicProfiles extends Construct {
       registrations: Registrations;
       layer: ILayerVersion;
       imageMagickLayer: Lambda.ILayerVersion;
-    }
+    },
   ) {
     super(parent, "publicProfiles");
 
@@ -66,7 +66,7 @@ export class PublicProfiles extends Construct {
     generateThumbnail.addEventSource(
       new EventSources.DynamoEventSource(registrations.registrationsTable, {
         startingPosition: Lambda.StartingPosition.LATEST,
-      })
+      }),
     );
 
     // List public profiles
@@ -118,7 +118,7 @@ export class PublicProfiles extends Construct {
             publicProfilesByCodefreezeIndexName,
         },
         layers: [layer],
-      }
+      },
     );
 
     this.listPublicProfilesURL = listPublicProfilesFn.addFunctionUrl({
@@ -152,7 +152,7 @@ export class PublicProfiles extends Construct {
     onPublish.addEventSource(
       new EventSources.DynamoEventSource(registrations.registrationsTable, {
         startingPosition: Lambda.StartingPosition.LATEST,
-      })
+      }),
     );
   }
 }

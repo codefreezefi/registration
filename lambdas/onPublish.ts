@@ -16,11 +16,11 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
     if (NewImage === undefined) continue;
     const OldProfile = unmarshall(OldImage as Record<string, AttributeValue>);
     const UpdatedProfile = unmarshall(
-      NewImage as Record<string, AttributeValue>
+      NewImage as Record<string, AttributeValue>,
     );
     if (OldProfile.codefreeze === UpdatedProfile.codefreeze) return;
     console.log(
-      `Codefreeze changed from ${OldProfile.codefreeze} to ${UpdatedProfile.codefreeze}`
+      `Codefreeze changed from ${OldProfile.codefreeze} to ${UpdatedProfile.codefreeze}`,
     );
     if (UpdatedProfile.codefreeze === undefined) return;
     if (UpdatedProfile.publicProfile === false) return;
@@ -48,7 +48,7 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
           },
         },
         Source: From,
-      })
+      }),
     );
   }
 };

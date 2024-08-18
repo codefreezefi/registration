@@ -77,7 +77,7 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
           Metadata: {
             original: `${Item.photo} ${type} ${dimensions} ${colorDepth} ${colorFormat}`,
           },
-        })
+        }),
       );
 
       const url = `https://${ImagesBucketName}.s3.${process.env.AWS_DEFAULT_REGION}.amazonaws.com/${resizedName}`;
@@ -101,7 +101,7 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
             },
           },
           ReturnValues: "NONE",
-        })
+        }),
       );
     } catch (error) {
       console.error(error);

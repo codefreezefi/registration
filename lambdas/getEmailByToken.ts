@@ -20,7 +20,7 @@ export const getEmailByToken =
               S: email.toLowerCase(),
             },
           },
-        })
+        }),
       );
 
       const item = unmarshall(Item ?? {});

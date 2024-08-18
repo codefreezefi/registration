@@ -6,13 +6,13 @@ export class LambdaLogGroup extends Construct {
   constructor(
     parent: Construct,
     id: string,
-    retention = Logs.RetentionDays.ONE_WEEK
+    retention = Logs.RetentionDays.ONE_WEEK,
   ) {
     super(parent, id);
     this.logGroup = new Logs.LogGroup(this, "logGroup", {
       retention,
       logGroupName: `/${Stack.of(this).stackName}/fn/${id}-${Names.uniqueId(
-        this
+        this,
       )}`,
       logGroupClass: Logs.LogGroupClass.STANDARD,
       removalPolicy: RemovalPolicy.DESTROY,

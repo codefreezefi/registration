@@ -3,7 +3,7 @@ import { Show, createSignal, createResource, createEffect } from "solid-js";
 import { Progress } from "./Progress.js";
 
 export const register = async (
-  registration: Registration
+  registration: Registration,
 ): Promise<
   { success: false; id: undefined } | { success: true; id: string }
 > => {
@@ -35,7 +35,7 @@ export const Submit = () => {
   const isValid = () =>
     [isValidName(), isValidEmail(), isCodeOfConductAccepted()].reduce(
       (allValid, v) => (v === false ? false : allValid),
-      true
+      true,
     );
   const [registrationData, submitRegistration] = createSignal<Registration>();
   const [submittedRegistration] = createResource(registrationData, register);

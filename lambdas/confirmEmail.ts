@@ -15,7 +15,7 @@ const db = new DynamoDBClient({});
 const byToken = getEmailByToken({ db, TableName });
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+  event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
   console.log(JSON.stringify({ event }));
 
@@ -26,18 +26,21 @@ export const handler = async (
 
   if (!isEmail(email) || !isCode(code))
     return {
-      statusCode: 400,headers
+      statusCode: 400,
+      headers,
     };
 
   const maybeVerifiedEmail = await byToken({ email, code });
   if ("error" in maybeVerifiedEmail) {
     return {
-      statusCode: 400,headers
+      statusCode: 400,
+      headers,
     };
   }
 
   return {
-    statusCode: 200,headers
+    statusCode: 200,
+    headers,
   };
 };
 

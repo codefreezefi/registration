@@ -14,7 +14,7 @@ export const LucideIcon = (
   props: {
     icon: IconNode;
     class?: string;
-  } & LucideProps
+  } & LucideProps,
 ) => {
   const [, attrs, children] = props.icon;
   const svgProps = {

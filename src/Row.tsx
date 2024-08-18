@@ -1,7 +1,7 @@
 import { Show, type ParentProps, type JSX } from "solid-js";
 
 export const Row = (
-  props: ParentProps<{ aside?: JSX.Element; id?: string }>
+  props: ParentProps<{ aside?: JSX.Element; id?: string }>,
 ) => (
   <div class="row mb-4" id={props.id ?? ""}>
     <div class="col-12 col-lg-8 col-xl-7">{props.children}</div>

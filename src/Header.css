@@ -31,7 +31,10 @@ header.main > *:nth-child(even) {
 
 header.main h1 {
   color: #f3f7b8;
-  text-shadow: 1px 1px 1px #2b404d, -1px 1px 1px #2b404d, -1px -1px 1px #2b404d,
+  text-shadow:
+    1px 1px 1px #2b404d,
+    -1px 1px 1px #2b404d,
+    -1px -1px 1px #2b404d,
     1px -1px 1px #2b404d;
   line-height: 65%;
   font-size: 4vh;

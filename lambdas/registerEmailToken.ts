@@ -57,7 +57,7 @@ export const registerEmailToken =
               N: `${Math.floor(Date.now() / 1000)}`,
             },
           },
-        })
+        }),
       );
 
       return { success: true };
@@ -65,7 +65,7 @@ export const registerEmailToken =
       if ((error as Error).name === ConditionalCheckFailedException.name)
         return {
           error: new ConflictError(
-            `Login requests for '${email}' already exists.`
+            `Login requests for '${email}' already exists.`,
           ),
         };
       console.error(error);

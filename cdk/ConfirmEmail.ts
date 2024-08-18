@@ -19,7 +19,7 @@ export class ConfirmEmail extends Construct {
       lambdas: BackendLambdas;
       registrations: Registrations;
       layer: ILayerVersion;
-    }
+    },
   ) {
     super(parent, "confirm-email");
 

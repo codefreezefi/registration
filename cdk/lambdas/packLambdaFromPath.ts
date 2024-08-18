@@ -12,7 +12,7 @@ export const packLambdaFromPath = async (
   id: string,
   sourceFile = `lambdas/${id}.ts`,
   handlerFunction = "handler",
-  baseDir = process.cwd()
+  baseDir = process.cwd(),
 ): Promise<PackedLambda> => {
   try {
     await mkdir(path.join(process.cwd(), "dist", "lambdas"), {

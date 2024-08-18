@@ -20,7 +20,7 @@ const { TableName } = fromEnv({
 const emailRepo = registerEmailToken({ db, TableName });
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+  event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
   console.log(JSON.stringify({ event }));
 
@@ -69,7 +69,7 @@ export const handler = async (
         },
       },
       Source: "notification@codefreeze.fi",
-    })
+    }),
   );
 
   return {

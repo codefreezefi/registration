@@ -22,7 +22,7 @@ const byToken = getEmailByToken({ db, TableName: EmailsTableName });
 const ses = new SESClient({});
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+  event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
   console.log(JSON.stringify({ event }));
 
@@ -54,7 +54,7 @@ export const handler = async (
         email,
         ...rest,
       }),
-    })
+    }),
   );
 
   await ses.send(
@@ -80,7 +80,7 @@ export const handler = async (
         },
       },
       Source: From,
-    })
+    }),
   );
 
   return {

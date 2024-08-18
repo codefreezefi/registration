@@ -4,7 +4,7 @@ import { Collapse, Expand, OK } from "./LucideIcon.js";
 import "./Collapsible.css";
 
 export const Collapsible = (
-  props: ParentProps<{ title: string; ok?: boolean }>
+  props: ParentProps<{ title: string; ok?: boolean }>,
 ) => {
   const [expanded, setExpanded] = createSignal<boolean>(true);
 

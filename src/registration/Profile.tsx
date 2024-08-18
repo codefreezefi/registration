@@ -87,7 +87,7 @@ const ProfileURL = (props: {
               const u = new URL(e.target.value);
               if (!props.pattern.test(u.toString())) {
                 throw new Error(
-                  `URL ${u.toString()} does not match pattern ${props.pattern.toString()}`
+                  `URL ${u.toString()} does not match pattern ${props.pattern.toString()}`,
                 );
               }
               batch(() => {

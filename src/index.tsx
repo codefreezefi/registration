@@ -36,5 +36,5 @@ render(
       </main>
     </RegistrationProvider>
   ),
-  root!
+  root!,
 );
