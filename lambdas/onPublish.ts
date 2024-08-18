@@ -23,6 +23,7 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
       `Codefreeze changed from ${OldProfile.codefreeze} to ${UpdatedProfile.codefreeze}`
     );
     if (UpdatedProfile.codefreeze === undefined) return;
+    if (UpdatedProfile.publicProfile === false) return;
 
     await ses.send(
       new SendEmailCommand({

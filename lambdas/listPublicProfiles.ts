@@ -64,16 +64,22 @@ export const handler = async (
             name,
             photoThumbnail,
             pronouns,
-          }) => ({
-            github,
-            homepage,
-            linkedin,
-            mastodon,
-            matrix,
-            name,
-            photoThumbnail,
-            pronouns,
-          })
+            publicProfile,
+          }) =>
+            publicProfile === false
+              ? {
+                  name: "Anonymous",
+                }
+              : {
+                  github,
+                  homepage,
+                  linkedin,
+                  mastodon,
+                  matrix,
+                  name,
+                  photoThumbnail,
+                  pronouns,
+                }
         )
       ),
     };

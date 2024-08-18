@@ -91,6 +91,7 @@ export class PublicProfiles extends Construct {
         "name",
         "photoThumbnail",
         "pronouns",
+        "publicProfile",
       ],
     });
 
