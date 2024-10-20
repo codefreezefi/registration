@@ -20,7 +20,7 @@ export class BackendStack extends Stack {
     {
       lambdas,
       packedLayer,
-    }: { lambdas: BackendLambdas; packedLayer: PackedLayer },
+    }: { lambdas: BackendLambdas; packedLayer: PackedLayer }
   ) {
     super(parent, stackName);
 
@@ -58,12 +58,12 @@ export class BackendStack extends Stack {
             this,
             "imagemagickLayerBucket",
             // Must be in same region as the stack
-            "imagemagick-layer",
+            "imagemagick-layer"
           ),
           // This is created using https://github.com/CyprusCodes/imagemagick-aws-lambda-2
-          "layer.zip",
+          "layer.zip"
         ),
-      },
+      }
     );
 
     const publicProfiles = new PublicProfiles(this, {
