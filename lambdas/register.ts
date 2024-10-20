@@ -9,7 +9,7 @@ import { fromEnv } from "@nordicsemiconductor/from-env";
 import id128 from "id128";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import { CC, From } from "./emails.ts";
+import { CC, From } from "./emails.js";
 
 const { EmailsTableName, RegistrationsTableName } = fromEnv({
   EmailsTableName: "EMAILS_TABLE_NAME",

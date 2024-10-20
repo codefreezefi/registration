@@ -10,8 +10,8 @@ import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
 import { Registrations } from "./Registrations.js";
 import type { PackedLayer } from "./lambdas/packLayer.js";
 import { LambdaSource } from "./lambdas/LambdaSource.js";
-import { Register } from "./Register.ts";
-import { PublicProfiles } from "./PublicProfiles.ts";
+import { Register } from "./Register.js";
+import { PublicProfiles } from "./PublicProfiles.js";
 
 export class BackendStack extends Stack {
   public constructor(
