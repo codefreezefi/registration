@@ -8,10 +8,11 @@ import {
 import { ConfirmEmail } from "./ConfirmEmail.js";
 import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
 import { Registrations } from "./Registrations.js";
-import type { PackedLayer } from "./lambdas/packLayer.js";
-import { LambdaSource } from "./lambdas/LambdaSource.js";
+import { LambdaSource } from "@bifravst/aws-cdk-lambda-helpers/cdk";
 import { Register } from "./Register.js";
+import { type PackedLayer } from "@bifravst/aws-cdk-lambda-helpers/layer";
 import { PublicProfiles } from "./PublicProfiles.js";
+import { ParticipantsList } from "./ParticipantsList.ts";
 
 export class BackendStack extends Stack {
   public constructor(
@@ -73,6 +74,12 @@ export class BackendStack extends Stack {
       registrations,
     });
 
+    const participantsList = new ParticipantsList(this, {
+      lambdas,
+      layer,
+      registrations,
+    });
+
     new CfnOutput(this, "requestTokenAPI", {
       value: confirmEmail.requestTokenURL.url,
       exportName: `${this.stackName}:requestTokenAPI`,
@@ -91,6 +98,11 @@ export class BackendStack extends Stack {
     new CfnOutput(this, "publicProfilesURL", {
       value: publicProfiles.listPublicProfilesURL.url,
       exportName: `${this.stackName}:publicProfilesURL`,
+    });
+
+    new CfnOutput(this, "listParticipantEmailsURL", {
+      value: participantsList.listParticipantEmailsURL.url,
+      exportName: `${this.stackName}:listParticipantEmailsURL`,
     });
   }
 }

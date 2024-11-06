@@ -1,4 +1,7 @@
-import { packLambdaFromPath, type PackedLambda } from "./packLambdaFromPath.js";
+import {
+  packLambdaFromPath,
+  type PackedLambda,
+} from "@bifravst/aws-cdk-lambda-helpers";
 
 export type BackendLambdas = {
   requestToken: PackedLambda;
@@ -6,14 +9,18 @@ export type BackendLambdas = {
   register: PackedLambda;
   generateThumbnail: PackedLambda;
   listPublicProfiles: PackedLambda;
+  listParticipantEmails: PackedLambda;
   onPublish: PackedLambda;
 };
 
+const pack = async (id: string) => packLambdaFromPath(id, `lambdas/${id}.ts`);
+
 export const packBackendLambdas = async (): Promise<BackendLambdas> => ({
-  requestToken: await packLambdaFromPath("requestToken"),
-  confirmEmail: await packLambdaFromPath("confirmEmail"),
-  register: await packLambdaFromPath("register"),
-  generateThumbnail: await packLambdaFromPath("generateThumbnail"),
-  listPublicProfiles: await packLambdaFromPath("listPublicProfiles"),
-  onPublish: await packLambdaFromPath("onPublish"),
+  requestToken: await pack("requestToken"),
+  confirmEmail: await pack("confirmEmail"),
+  register: await pack("register"),
+  generateThumbnail: await pack("generateThumbnail"),
+  listPublicProfiles: await pack("listPublicProfiles"),
+  listParticipantEmails: await pack("listParticipantEmails"),
+  onPublish: await pack("onPublish"),
 });

@@ -4,9 +4,21 @@ import { BackendStack } from "./BackendStack.js";
 export class BackendApp extends App {
   public constructor(
     stackName: string,
-    args: ConstructorParameters<typeof BackendStack>[2],
+    {
+      isTest,
+      version,
+      ...backendArgs
+    }: ConstructorParameters<typeof BackendStack>[2] & {
+      isTest: boolean;
+      version: string;
+    }
   ) {
-    super();
-    new BackendStack(this, stackName, args);
+    super({
+      context: {
+        isTest,
+        version,
+      },
+    });
+    new BackendStack(this, stackName, backendArgs);
   }
 }

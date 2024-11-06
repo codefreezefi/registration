@@ -1,23 +1,27 @@
-import { DynamoDBClient, QueryCommand } from "@aws-sdk/client-dynamodb";
-import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { fromEnv } from "@nordicsemiconductor/from-env";
 import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2,
 } from "aws-lambda";
+import { listProfilesForYear } from "./profiles.js";
 
 const { RegistrationsTableName, publicProfilesByCodefreezeIndexName } = fromEnv(
   {
     RegistrationsTableName: "REGISTRATIONS_TABLE_NAME",
     publicProfilesByCodefreezeIndexName:
       "PUBLIC_PROFILES_BY_CODEFREEZE_INDEX_NAME",
-  },
+  }
 )(process.env);
 
-const db = new DynamoDBClient({});
+const list = listProfilesForYear({
+  db: new DynamoDBClient({}),
+  RegistrationsTableName,
+  IndexName: publicProfilesByCodefreezeIndexName,
+});
 
 export const handler = async (
-  event: APIGatewayProxyEventV2,
+  event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
   console.log(JSON.stringify({ event }));
 
@@ -26,24 +30,12 @@ export const handler = async (
   };
 
   try {
-    const { Items } = await db.send(
-      new QueryCommand({
-        TableName: RegistrationsTableName,
-        IndexName: publicProfilesByCodefreezeIndexName,
-        KeyConditionExpression: "#codefreeze = :codefreeze",
-        ExpressionAttributeNames: {
-          "#codefreeze": "codefreeze",
-        },
-        ExpressionAttributeValues: {
-          ":codefreeze": {
-            N: parseInt(
-              event.queryStringParameters?.codefreeze ??
-                new Date().getFullYear().toString(),
-              10,
-            ).toString(),
-          },
-        },
-      }),
+    const profiles = await list(
+      parseInt(
+        event.queryStringParameters?.codefreeze ??
+          new Date().getFullYear().toString(),
+        10
+      )
     );
 
     return {
@@ -54,7 +46,7 @@ export const handler = async (
         "Cache-Control": "public, max-age=600",
       },
       body: JSON.stringify(
-        Items?.map((Item) => unmarshall(Item) ?? []).map(
+        profiles.map(
           ({
             github,
             homepage,
@@ -79,8 +71,8 @@ export const handler = async (
                   name,
                   photoThumbnail,
                   pronouns,
-                },
-        ),
+                }
+        )
       ),
     };
   } catch (err) {
