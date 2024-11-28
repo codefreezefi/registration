@@ -7,7 +7,7 @@
    viewBox="0 0 793.70081 1122.5197"
    version="1.1"
    id="svg5"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="template.svg"
    xml:space="preserve"
    inkscape:export-filename="../../../Downloads/invitation-letter-Yeboah Isaac Owusu.pdf"
@@ -29,8 +29,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.98220682"
-     inkscape:cx="182.24268"
-     inkscape:cy="487.67733"
+     inkscape:cx="181.73362"
+     inkscape:cy="488.18639"
      inkscape:window-width="2560"
      inkscape:window-height="1412"
      inkscape:window-x="0"
@@ -266,7 +266,7 @@
          id="tspan19942"
          x="396.75031"
          y="208.59714"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans Bold';fill:#000000;stroke-width:8.10819">Sat Jan 11th - Sat 18th 2025 Kiilopää, Finland</tspan></text><text
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans Bold';fill:#000000;stroke-width:8.10819">{{ CODEFREEZE_DATE }} Kiilopää, Finland</tspan></text><text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.302px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:8.10819;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
        x="397.05777"
@@ -295,112 +295,132 @@
        transform="translate(-7.0936582,0.11778606)"><tspan
          x="79.677818"
          y="352.15146"
-         id="tspan1">To whom it may concern,
+         id="tspan3">To whom it may concern,
 </tspan><tspan
          x="79.677818"
          y="375.48484"
-         id="tspan2">
+         id="tspan4">
 </tspan><tspan
          x="79.677818"
          y="398.81821"
-         id="tspan3">we are honored to extend our invitation to participate in Codefreeze 2025 which takes place </tspan><tspan
+         id="tspan5">we are honored to extend our invitation to participate in Codefreeze 2025 which takes place </tspan><tspan
          x="79.677818"
          y="422.15159"
-         id="tspan4">in Kiilopää, Finland from Saturday, 11. January to Saturday, 18. January 2025 to
+         id="tspan6">in Kiilopää, Finland from Saturday, 11. January to Saturday, 18. January 2025 to
 </tspan><tspan
          x="79.677818"
          y="445.48496"
-         id="tspan5">
-</tspan><tspan
-         x="79.677818"
-         y="468.81833"
-         id="tspan6">
-</tspan><tspan
-         x="79.677818"
-         y="492.15171"
          id="tspan7">
 </tspan><tspan
          x="79.677818"
-         y="515.48508"
+         y="468.81833"
          id="tspan8">
 </tspan><tspan
          x="79.677818"
-         y="538.81846"
+         y="492.15171"
          id="tspan9">
 </tspan><tspan
          x="79.677818"
-         y="562.15183"
+         y="515.48508"
          id="tspan10">
 </tspan><tspan
          x="79.677818"
+         y="538.81846"
+         id="tspan12">
+</tspan><tspan
+         x="79.677818"
+         y="562.15183"
+         id="tspan13">
+</tspan><tspan
+         x="79.677818"
          y="585.4852"
-         id="tspan12"><tspan
+         id="tspan15"><tspan
            style="font-weight:bold;letter-spacing:0px;word-spacing:0px"
-           id="tspan11">
+           id="tspan14">
 </tspan></tspan><tspan
          x="79.677818"
          y="608.81858"
-         id="tspan14"><tspan
+         id="tspan17"><tspan
            style="font-weight:bold;letter-spacing:0px;word-spacing:0px"
-           id="tspan13">
+           id="tspan16">
 </tspan></tspan><tspan
          x="79.677818"
          y="632.15195"
-         id="tspan16"><tspan
+         id="tspan19"><tspan
            style="font-weight:bold;letter-spacing:0px;word-spacing:0px"
-           id="tspan15">
+           id="tspan18">
 </tspan></tspan><tspan
          x="79.677818"
          y="655.48533"
-         id="tspan18"><tspan
+         id="tspan21"><tspan
            style="font-weight:bold;letter-spacing:0px;word-spacing:0px"
-           id="tspan17">
+           id="tspan20">
 </tspan></tspan><tspan
          x="79.677818"
          y="678.8187"
-         id="tspan19">Codefreeze is a yearly, non-profit, international unconference for open-minded  Software </tspan><tspan
+         id="tspan22">Codefreeze is a yearly, non-profit, international unconference for open-minded  Software </tspan><tspan
          x="79.677818"
          y="702.15207"
-         id="tspan20">Crafters and Testers who want to improve their craft and the software industry as a whole.
+         id="tspan23">Crafters and Testers who want to improve their craft and the software industry as a whole.
 </tspan><tspan
          x="79.677818"
          y="725.48545"
-         id="tspan21">
-</tspan><tspan
-         x="79.677818"
-         y="748.81882"
-         id="tspan22">It is organised by members of the Software Crafters Community (softwarecrafters.org), the </tspan><tspan
-         x="79.677818"
-         y="772.1522"
-         id="tspan23">conference attracts participants from all over the world.
-</tspan><tspan
-         x="79.677818"
-         y="795.48557"
          id="tspan24">
 </tspan><tspan
          x="79.677818"
-         y="818.81894"
-         id="tspan25">On behalf of the organizers,
+         y="748.81882"
+         id="tspan25">It is organised by members of the Software Crafters Community (softwarecrafters.org), the </tspan><tspan
+         x="79.677818"
+         y="772.1522"
+         id="tspan26">conference attracts participants from all over the world.
 </tspan><tspan
          x="79.677818"
-         y="842.15232"
-         id="tspan26">
-</tspan><tspan
-         x="79.677818"
-         y="865.48569"
+         y="795.48557"
          id="tspan27">
 </tspan><tspan
          x="79.677818"
+         y="818.81894"
+         id="tspan28">On behalf of the organizers,
+</tspan><tspan
+         x="79.677818"
+         y="842.15232"
+         id="tspan29">Markus Tacker
+</tspan><tspan
+         x="79.677818"
+         y="865.48569"
+         id="tspan30">m@coderbyheart.com
+</tspan><tspan
+         x="79.677818"
          y="888.81907"
-         id="tspan28">Markus Tacker
+         id="tspan31">+47464426495
 </tspan><tspan
          x="79.677818"
          y="912.15244"
-         id="tspan29">m@coderbyheart.com
+         id="tspan32">
 </tspan><tspan
          x="79.677818"
          y="935.48581"
-         id="tspan30">+47464426495</tspan></text><g
+         id="tspan33">
+</tspan><tspan
+         x="79.677818"
+         y="958.81919"
+         id="tspan34">
+</tspan><tspan
+         x="79.677818"
+         y="982.15256"
+         id="tspan35">
+</tspan><tspan
+         x="79.677818"
+         y="1005.4859"
+         id="tspan37"><tspan
+           style="font-size:13.3333px"
+           id="tspan36">Registration ID: {{ REGISTRATION_ID }}
+</tspan></tspan><tspan
+         x="79.677818"
+         y="1028.8193"
+         id="tspan39"><tspan
+           style="font-size:13.3333px"
+           id="tspan38">This letter is valid without a signature. </tspan></tspan></text><g
        id="g3403"
        transform="matrix(1.12648,0,0,1.12648,-37.088049,-69.528061)"
        style="opacity:0.6"><image

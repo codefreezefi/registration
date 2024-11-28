@@ -47,6 +47,8 @@ await fs.writeFile(
   template
     .replaceAll("{{ DATE }}", new Date().toISOString().slice(0, 10))
     .replaceAll("{{ NAME }}", registration.name)
+    .replaceAll("{{ REGISTRATION_ID }}", registration.id)
+    .replaceAll("{{ CODEFREEZE_DATE }}", "Sat Jan 11th - Sat 18th 2025") // FIXME: make dynamic
 );
 
 console.log(
