@@ -2,14 +2,14 @@ import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2,
 } from "aws-lambda";
-import { isEmail } from "./requestToken.js";
-import { getEmailByToken } from "./getEmailByToken.js";
+import { isEmail } from './requestToken.ts';
+import { getEmailByToken } from './getEmailByToken.ts';
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { fromEnv } from "@nordicsemiconductor/from-env";
 import id128 from "id128";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import { CC, From } from "./emails.js";
+import { CC, From } from './emails.ts';
 
 const { EmailsTableName, RegistrationsTableName } = fromEnv({
   EmailsTableName: "EMAILS_TABLE_NAME",

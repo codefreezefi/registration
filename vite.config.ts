@@ -5,7 +5,7 @@ import path from "node:path";
 import { fromEnv } from "@nordicsemiconductor/from-env";
 
 const { version: defaultVersion, homepage } = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "package.json"), "utf-8"),
+  fs.readFileSync(path.join(process.cwd(), "package.json"), "utf-8")
 );
 const version = process.env.VERSION ?? defaultVersion;
 
@@ -38,5 +38,8 @@ export default defineConfig({
     REQUEST_TOKEN_API: JSON.stringify(requestTokenAPI),
     REGISTER_API: JSON.stringify(registerAPI),
     SENTRY_DSN: JSON.stringify(sentryDSN),
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
 });

@@ -2,7 +2,7 @@ import type { AttributeValue } from "@aws-sdk/client-dynamodb";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import type { DynamoDBStreamEvent } from "aws-lambda";
-import { CC, From } from "./emails.js";
+import { CC, From } from './emails.ts';
 
 const ses = new SESClient({});
 

@@ -1,5 +1,5 @@
-import { Logo } from "./Logo.js";
-import { Codefreeze } from "./codefreeze.js";
+import { Logo } from './Logo.tsx';
+import { Codefreeze } from './codefreeze.ts';
 
 import "./Header.css";
 

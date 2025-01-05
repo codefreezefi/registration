@@ -4,7 +4,7 @@ import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2,
 } from "aws-lambda";
-import { listProfilesForYear } from "./profiles.js";
+import { listProfilesForYear } from './profiles.ts';
 
 const { RegistrationsTableName, participantsByCodefreezeIndexName } = fromEnv({
   RegistrationsTableName: "REGISTRATIONS_TABLE_NAME",

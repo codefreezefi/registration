@@ -10,8 +10,8 @@ import {
 } from "aws-cdk-lib";
 import type { ILayerVersion } from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
-import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
-import type { Registrations } from "./Registrations.js";
+import type { BackendLambdas } from './lambdas/packBackendLambdas.ts';
+import type { Registrations } from './Registrations.ts';
 
 export class PublicProfiles extends Construct {
   public readonly listPublicProfilesURL: Lambda.IFunctionUrl;

@@ -3,8 +3,8 @@ import {
   DynamoDBClient,
   UpdateItemCommand,
 } from "@aws-sdk/client-dynamodb";
-import { InternalError } from "./InternalError.js";
-import { ConflictError } from "./ConflictError.js";
+import { InternalError } from './InternalError.ts';
+import { ConflictError } from './ConflictError.ts';
 
 export const registerEmailToken =
   ({ db, TableName }: { db: DynamoDBClient; TableName: string }) =>

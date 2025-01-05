@@ -1,4 +1,4 @@
-import { Row } from "./Row.js";
+import { Row } from './Row.tsx';
 
 export const AfterRegistration = () => (
   <Row>

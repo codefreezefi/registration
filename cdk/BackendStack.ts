@@ -5,13 +5,13 @@ import {
   aws_lambda as Lambda,
   aws_s3 as S3,
 } from "aws-cdk-lib";
-import { ConfirmEmail } from "./ConfirmEmail.js";
-import type { BackendLambdas } from "./lambdas/packBackendLambdas.js";
-import { Registrations } from "./Registrations.js";
+import { ConfirmEmail } from "./ConfirmEmail.ts";
+import type { BackendLambdas } from "./lambdas/packBackendLambdas.ts";
+import { Registrations } from "./Registrations.ts";
 import { LambdaSource } from "@bifravst/aws-cdk-lambda-helpers/cdk";
-import { Register } from "./Register.js";
+import { Register } from "./Register.ts";
 import { type PackedLayer } from "@bifravst/aws-cdk-lambda-helpers/layer";
-import { PublicProfiles } from "./PublicProfiles.js";
+import { PublicProfiles } from "./PublicProfiles.ts";
 import { ParticipantsList } from "./ParticipantsList.ts";
 
 export class BackendStack extends Stack {
@@ -31,11 +31,11 @@ export class BackendStack extends Stack {
       layerVersionName: `${Stack.of(this).stackName}-layer`,
       code: new LambdaSource(this, {
         id: "layer",
-        zipFile: packedLayer.layerZipFile,
+        zipFilePath: packedLayer.layerZipFilePath,
         hash: packedLayer.hash,
       }).code,
       compatibleArchitectures: [Lambda.Architecture.ARM_64],
-      compatibleRuntimes: [Lambda.Runtime.NODEJS_20_X],
+      compatibleRuntimes: [Lambda.Runtime.NODEJS_22_X],
     });
 
     const confirmEmail = new ConfirmEmail(this, {

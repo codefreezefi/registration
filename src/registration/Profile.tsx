@@ -1,6 +1,6 @@
 import { Show, createSignal, batch } from "solid-js";
-import { useRegistration, type Registration } from "../context/Registration.js";
-import { Collapsible } from "../Collapsible.js";
+import { useRegistration, type Registration } from '../context/Registration.tsx';
+import { Collapsible } from '../Collapsible.tsx';
 
 export const PublicProfile = () => {
   const { registration } = useRegistration();

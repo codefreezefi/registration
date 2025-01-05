@@ -1,6 +1,6 @@
-import { BackendApp } from "./BackendApp.js";
-import { packBackendLambdas } from "./lambdas/packBackendLambdas.js";
-import type pJson from "../package.json";
+import { BackendApp } from './BackendApp.ts';
+import { packBackendLambdas } from './lambdas/packBackendLambdas.ts';
+import pJson from "../package.json" with {type: 'json'}
 import { packLayer } from "@bifravst/aws-cdk-lambda-helpers/layer";
 
 const dependencies: Array<keyof (typeof pJson)["devDependencies"]> = [

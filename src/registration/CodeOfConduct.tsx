@@ -1,5 +1,5 @@
-import { Collapsible } from "../Collapsible.js";
-import { useRegistration } from "../context/Registration.js";
+import { Collapsible } from '../Collapsible.tsx';
+import { useRegistration } from '../context/Registration.tsx';
 
 export const CodeOfConduct = () => {
   const { registration, update } = useRegistration();

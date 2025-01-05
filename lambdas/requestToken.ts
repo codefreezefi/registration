@@ -3,11 +3,11 @@ import type {
   APIGatewayProxyResultV2,
 } from "aws-lambda";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import { generateCode } from "../src/registration/code.js";
+import { generateCode } from '../src/registration/code.ts';
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { fromEnv } from "@nordicsemiconductor/from-env";
-import { registerEmailToken } from "./registerEmailToken.js";
-import { ConflictError } from "./ConflictError.js";
+import { registerEmailToken } from './registerEmailToken.ts';
+import { ConflictError } from './ConflictError.ts';
 import { error } from "console";
 
 const ses = new SESClient({});

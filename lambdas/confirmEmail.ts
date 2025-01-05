@@ -4,8 +4,8 @@ import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2,
 } from "aws-lambda";
-import { getEmailByToken } from "./getEmailByToken.js";
-import { isEmail } from "./requestToken.js";
+import { getEmailByToken } from './getEmailByToken.ts';
+import { isEmail } from './requestToken.ts';
 
 const { TableName } = fromEnv({
   TableName: "EMAILS_TABLE_NAME",

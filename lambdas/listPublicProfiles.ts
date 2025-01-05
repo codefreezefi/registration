@@ -4,7 +4,7 @@ import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2,
 } from "aws-lambda";
-import { listProfilesForYear } from "./profiles.js";
+import { listProfilesForYear } from "./profiles.ts";
 
 const { RegistrationsTableName, publicProfilesByCodefreezeIndexName } = fromEnv(
   {
@@ -46,33 +46,29 @@ export const handler = async (
         "Cache-Control": "public, max-age=600",
       },
       body: JSON.stringify(
-        profiles.map(
-          ({
-            github,
-            homepage,
-            linkedin,
-            mastodon,
-            matrix,
-            name,
-            photoThumbnail,
-            pronouns,
-            publicProfile,
-          }) =>
-            publicProfile === false
-              ? {
-                  name: "Anonymous",
-                }
-              : {
-                  github,
-                  homepage,
-                  linkedin,
-                  mastodon,
-                  matrix,
-                  name,
-                  photoThumbnail,
-                  pronouns,
-                }
-        )
+        profiles
+          .filter(({ publicProfile }) => publicProfile !== false)
+          .map(
+            ({
+              github,
+              homepage,
+              linkedin,
+              mastodon,
+              matrix,
+              name,
+              photoThumbnail,
+              pronouns,
+            }) => ({
+              github,
+              homepage,
+              linkedin,
+              mastodon,
+              matrix,
+              name,
+              photoThumbnail,
+              pronouns,
+            })
+          )
       ),
     };
   } catch (err) {

@@ -1,6 +1,6 @@
-import { useRegistration, type Registration } from "../context/Registration.js";
+import { useRegistration, type Registration } from '../context/Registration.tsx';
 import { Show, createSignal, createResource, createEffect } from "solid-js";
-import { Progress } from "./Progress.js";
+import { Progress } from './Progress.tsx';
 
 export const register = async (
   registration: Registration,

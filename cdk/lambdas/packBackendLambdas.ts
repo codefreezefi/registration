@@ -13,7 +13,8 @@ export type BackendLambdas = {
   onPublish: PackedLambda;
 };
 
-const pack = async (id: string) => packLambdaFromPath(id, `lambdas/${id}.ts`);
+const pack = async (id: string) =>
+  packLambdaFromPath({ id, sourceFilePath: `lambdas/${id}.ts` });
 
 export const packBackendLambdas = async (): Promise<BackendLambdas> => ({
   requestToken: await pack("requestToken"),

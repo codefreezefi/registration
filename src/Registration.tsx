@@ -1,13 +1,13 @@
-import { Codefreeze } from "./codefreeze.js";
-import { PublicProfile } from "./registration/Profile.js";
-import { CodeOfConduct } from "./registration/CodeOfConduct.js";
-import { useRegistration } from "./context/Registration.js";
+import { Codefreeze } from './codefreeze.ts';
+import { PublicProfile } from './registration/Profile.tsx';
+import { CodeOfConduct } from './registration/CodeOfConduct.tsx';
+import { useRegistration } from './context/Registration.tsx';
 import { Show } from "solid-js";
-import { ProfilePreview } from "./ProfilePreview.js";
-import { Row } from "./Row.js";
-import { Name } from "./registration/Name.js";
-import { Email } from "./registration/Email.js";
-import { Submit } from "./registration/Submit.js";
+import { ProfilePreview } from './ProfilePreview.tsx';
+import { Row } from './Row.tsx';
+import { Name } from './registration/Name.tsx';
+import { Email } from './registration/Email.tsx';
+import { Submit } from './registration/Submit.tsx';
 
 export const Registration = () => {
   const { registration } = useRegistration();

@@ -1,9 +1,9 @@
-import { useRegistration } from "./context/Registration.js";
+import { useRegistration } from './context/Registration.tsx';
 import { Show, type JSX } from "solid-js";
-import { Avatar } from "./icons/Avatar.js";
-import { GitHub, Homepage, LinkedIn } from "./LucideIcon.js";
-import { Mastodon } from "./icons/Mastodon.js";
-import { Matrix } from "./icons/Matrix.js";
+import { Avatar } from './icons/Avatar.tsx';
+import { GitHub, Homepage, LinkedIn } from './LucideIcon.tsx';
+import { Mastodon } from './icons/Mastodon.tsx';
+import { Matrix } from './icons/Matrix.tsx';
 
 import "./ProfilePreview.css";
 

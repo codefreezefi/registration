@@ -1,9 +1,9 @@
 import { Show, createEffect, createResource, createSignal } from "solid-js";
-import { Collapsible } from "../Collapsible.js";
-import { Row } from "../Row.js";
-import { useRegistration } from "../context/Registration.js";
-import { Progress } from "./Progress.js";
-import { VerificationCodeSent } from "./VerificationCodeSent.js";
+import { Collapsible } from '../Collapsible.tsx';
+import { Row } from '../Row.tsx';
+import { useRegistration } from '../context/Registration.tsx';
+import { Progress } from './Progress.tsx';
+import { VerificationCodeSent } from './VerificationCodeSent.tsx';
 
 const isValidEmail = (v?: string): v is string => /^.+@.+$/.test(v ?? "");
 export const isValidCode = (v?: string): v is string => /^\w{6}$/.test(v ?? "");
