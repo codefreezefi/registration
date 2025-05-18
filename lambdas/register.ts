@@ -1,93 +1,93 @@
+import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses'
+import { marshall } from '@aws-sdk/util-dynamodb'
+import { fromEnv } from '@nordicsemiconductor/from-env'
 import type {
-  APIGatewayProxyEventV2,
-  APIGatewayProxyResultV2,
-} from "aws-lambda";
-import { isEmail } from './requestToken.ts';
-import { getEmailByToken } from './getEmailByToken.ts';
-import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
-import { fromEnv } from "@nordicsemiconductor/from-env";
-import id128 from "id128";
-import { marshall } from "@aws-sdk/util-dynamodb";
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import { CC, From } from './emails.ts';
+	APIGatewayProxyEventV2,
+	APIGatewayProxyResultV2,
+} from 'aws-lambda'
+import id128 from 'id128'
+import { CC, From } from './emails.ts'
+import { getEmailByToken } from './getEmailByToken.ts'
+import { isEmail } from './requestToken.ts'
 
 const { EmailsTableName, RegistrationsTableName } = fromEnv({
-  EmailsTableName: "EMAILS_TABLE_NAME",
-  RegistrationsTableName: "REGISTRATIONS_TABLE_NAME",
-})(process.env);
+	EmailsTableName: 'EMAILS_TABLE_NAME',
+	RegistrationsTableName: 'REGISTRATIONS_TABLE_NAME',
+})(process.env)
 
-const db = new DynamoDBClient({});
-const byToken = getEmailByToken({ db, TableName: EmailsTableName });
+const db = new DynamoDBClient({})
+const byToken = getEmailByToken({ db, TableName: EmailsTableName })
 
-const ses = new SESClient({});
+const ses = new SESClient({})
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+	event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
-  console.log(JSON.stringify({ event }));
+	console.log(JSON.stringify({ event }))
 
-  const { email, code, ...rest } = JSON.parse(event.body ?? "{}");
-  const headers = {
-    "Access-Control-Allow-Origin": event.headers.origin as string,
-  };
+	const { email, code, ...rest } = JSON.parse(event.body ?? '{}')
+	const headers = {
+		'Access-Control-Allow-Origin': event.headers.origin as string,
+	}
 
-  if (!isEmail(email) || !isCode(code))
-    return {
-      statusCode: 400,
-      headers,
-    };
+	if (!isEmail(email) || !isCode(code))
+		return {
+			statusCode: 400,
+			headers,
+		}
 
-  const maybeVerifiedEmail = await byToken({ email, code });
-  if ("error" in maybeVerifiedEmail) {
-    return {
-      statusCode: 400,
-      headers,
-    };
-  }
+	const maybeVerifiedEmail = await byToken({ email, code })
+	if ('error' in maybeVerifiedEmail) {
+		return {
+			statusCode: 400,
+			headers,
+		}
+	}
 
-  const id = id128.Ulid.generate().toCanonical();
-  await db.send(
-    new PutItemCommand({
-      TableName: RegistrationsTableName,
-      Item: marshall({
-        id,
-        email,
-        ...rest,
-      }),
-    })
-  );
+	const id = id128.Ulid.generate().toCanonical()
+	await db.send(
+		new PutItemCommand({
+			TableName: RegistrationsTableName,
+			Item: marshall({
+				id,
+				email,
+				...rest,
+			}),
+		}),
+	)
 
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [`"${maybeVerifiedEmail.name}" <${email}>`],
-        CcAddresses: CC,
-      },
-      ReplyToAddresses: CC,
-      Message: {
-        Body: {
-          Text: {
-            Data: [
-              `Hei ${maybeVerifiedEmail.name},\nthank you for registering for Codefreeze.`,
-              `Your registration ID is ${id}.`,
-              `Please do no hesitate to reach out to us if you have any questions.`,
-              `❄`,
-            ].join("\n\n"),
-          },
-        },
-        Subject: {
-          Data: `[codefreeze.fi] Your registration ${id}`,
-        },
-      },
-      Source: From,
-    })
-  );
+	await ses.send(
+		new SendEmailCommand({
+			Destination: {
+				ToAddresses: [`"${maybeVerifiedEmail.name}" <${email}>`],
+				CcAddresses: CC,
+			},
+			ReplyToAddresses: CC,
+			Message: {
+				Body: {
+					Text: {
+						Data: [
+							`Hei ${maybeVerifiedEmail.name},\nthank you for registering for Codefreeze.`,
+							`Your registration ID is ${id}.`,
+							`Please do no hesitate to reach out to us if you have any questions.`,
+							`❄`,
+						].join('\n\n'),
+					},
+				},
+				Subject: {
+					Data: `[codefreeze.fi] Your registration ${id}`,
+				},
+			},
+			Source: From,
+		}),
+	)
 
-  return {
-    statusCode: 201,
-    headers,
-    body: JSON.stringify({ id }),
-  };
-};
+	return {
+		statusCode: 201,
+		headers,
+		body: JSON.stringify({ id }),
+	}
+}
 
-const isCode = (c: string): boolean => c.length === 6;
+const isCode = (c: string): boolean => c.length === 6

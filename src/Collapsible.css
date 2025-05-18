@@ -17,3 +17,8 @@ div.collapsible header > span .ok {
   margin-left: 0.5rem;
   color: green;
 }
+
+div.collapsible header > span .error {
+  margin-left: 0.5rem;
+  color: red;
+}

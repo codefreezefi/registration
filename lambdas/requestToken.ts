@@ -1,82 +1,82 @@
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses'
+import { fromEnv } from '@nordicsemiconductor/from-env'
 import type {
-  APIGatewayProxyEventV2,
-  APIGatewayProxyResultV2,
-} from "aws-lambda";
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-import { generateCode } from '../src/registration/code.ts';
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { fromEnv } from "@nordicsemiconductor/from-env";
-import { registerEmailToken } from './registerEmailToken.ts';
-import { ConflictError } from './ConflictError.ts';
-import { error } from "console";
+	APIGatewayProxyEventV2,
+	APIGatewayProxyResultV2,
+} from 'aws-lambda'
+import { error } from 'console'
+import { generateCode } from '../src/registration/code.ts'
+import { ConflictError } from './ConflictError.ts'
+import { registerEmailToken } from './registerEmailToken.ts'
 
-const ses = new SESClient({});
-const db = new DynamoDBClient({});
+const ses = new SESClient({})
+const db = new DynamoDBClient({})
 
 const { TableName } = fromEnv({
-  TableName: "EMAILS_TABLE_NAME",
-})(process.env);
+	TableName: 'EMAILS_TABLE_NAME',
+})(process.env)
 
-const emailRepo = registerEmailToken({ db, TableName });
+const emailRepo = registerEmailToken({ db, TableName })
 
 export const handler = async (
-  event: APIGatewayProxyEventV2,
+	event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> => {
-  console.log(JSON.stringify({ event }));
+	console.log(JSON.stringify({ event }))
 
-  const { email, name } = JSON.parse(event.body ?? "{}");
-  const headers = {
-    "Access-Control-Allow-Origin": event.headers.origin as string,
-  };
+	const { email, name } = JSON.parse(event.body ?? '{}')
+	const headers = {
+		'Access-Control-Allow-Origin': event.headers.origin as string,
+	}
 
-  if (!isEmail(email) || (typeof name !== "string" && name.length < 1))
-    return {
-      statusCode: 400,
-      headers,
-    };
+	if (!isEmail(email) || (typeof name !== 'string' && name.length < 1))
+		return {
+			statusCode: 400,
+			headers,
+		}
 
-  const code = generateCode();
+	const code = generateCode()
 
-  const maybeNewRequest = await emailRepo({ email, code, name });
+	const maybeNewRequest = await emailRepo({ email, code, name })
 
-  if ("error" in maybeNewRequest) {
-    if (error instanceof ConflictError) {
-      return {
-        statusCode: 409,
-        headers,
-      };
-    }
-    return {
-      statusCode: 400,
-      headers,
-    };
-  }
+	if ('error' in maybeNewRequest) {
+		if (error instanceof ConflictError) {
+			return {
+				statusCode: 409,
+				headers,
+			}
+		}
+		return {
+			statusCode: 400,
+			headers,
+		}
+	}
 
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [`"${name}" <${email}>`],
-      },
-      ReplyToAddresses: [`"Markus Tacker" <m@coderbyheart.com>`],
-      Message: {
-        Body: {
-          Text: {
-            Data: `Hei ${name},\nhere is your code to verify your email address: ${code}`,
-          },
-        },
-        Subject: {
-          Data: `[codefreeze.fi] Your verification code: ${code}`,
-        },
-      },
-      Source: "notification@codefreeze.fi",
-    }),
-  );
+	await ses.send(
+		new SendEmailCommand({
+			Destination: {
+				ToAddresses: [`"${name}" <${email}>`],
+			},
+			ReplyToAddresses: [`"Markus Tacker" <m@coderbyheart.com>`],
+			Message: {
+				Body: {
+					Text: {
+						Data: `Hei ${name},\nhere is your code to verify your email address: ${code}`,
+					},
+				},
+				Subject: {
+					Data: `[codefreeze.fi] Your verification code: ${code}`,
+				},
+			},
+			Source: 'notification@codefreeze.fi',
+		}),
+	)
 
-  return {
-    statusCode: 201,
-    headers,
-  };
-};
+	return {
+		statusCode: 201,
+		headers,
+	}
+}
 
 export const isEmail = (s: string): boolean =>
-  /.+@.+/.test(s) && !s.endsWith("@example.com");
+	/.+@.+/.test(s) && !s.endsWith('@example.com')

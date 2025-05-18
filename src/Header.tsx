@@ -1,26 +1,26 @@
-import { Logo } from './Logo.tsx';
-import { Codefreeze } from './codefreeze.ts';
+import { Logo } from './Logo.tsx'
+import { Codefreeze } from './codefreeze.ts'
 
-import "./Header.css";
+import './Header.css'
 
 export const Header = () => (
-  <header class="main">
-    <h1>
-      CODE
-      <br />
-      <small>FREEZE</small>
-    </h1>
-    <Logo class="logo" />
+	<header class="main">
+		<h1>
+			CODE
+			<br />
+			<small>FREEZE</small>
+		</h1>
+		<Logo class="logo" />
 
-    <p>
-      Sat {Codefreeze.start.getDate()}. &mdash; Sat {Codefreeze.end.getDate()}.
-      <br />
-      January {Codefreeze.end.getFullYear()}
-    </p>
-    <p>
-      Kiilopää
-      <br />
-      Finland
-    </p>
-  </header>
-);
+		<p>
+			Sat {Codefreeze.start.getDate()}. &mdash; Sat {Codefreeze.end.getDate()}.
+			<br />
+			January {Codefreeze.end.getFullYear()}
+		</p>
+		<p>
+			Kiilopää
+			<br />
+			Finland
+		</p>
+	</header>
+)

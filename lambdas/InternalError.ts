@@ -1,6 +1,6 @@
 export class InternalError extends Error {
-  constructor() {
-    super("Internal Error");
-    this.name = "InternalError";
-  }
+	constructor() {
+		super('Internal Error')
+		this.name = 'InternalError'
+	}
 }
