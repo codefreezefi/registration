@@ -14,7 +14,9 @@ export class Registrations extends Construct {
 				type: DynamoDB.AttributeType.STRING,
 			},
 			removalPolicy: RemovalPolicy.RETAIN,
-			pointInTimeRecovery: true,
+			pointInTimeRecoverySpecification: {
+				pointInTimeRecoveryEnabled: true,
+			},
 			stream: DynamoDB.StreamViewType.NEW_AND_OLD_IMAGES,
 		})
 
@@ -25,7 +27,9 @@ export class Registrations extends Construct {
 				type: DynamoDB.AttributeType.STRING,
 			},
 			removalPolicy: RemovalPolicy.RETAIN,
-			pointInTimeRecovery: true,
+			pointInTimeRecoverySpecification: {
+				pointInTimeRecoveryEnabled: true,
+			},
 		})
 	}
 }
