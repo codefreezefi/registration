@@ -1,5 +1,5 @@
 import { type ParentProps, createSignal, Show } from 'solid-js'
-import { Collapse, Error, Expand, OK } from './LucideIcon.tsx'
+import { Collapse, Error, Expand, OK } from './Icons.tsx'
 
 import './Collapsible.css'
 

@@ -3,7 +3,7 @@ import { useRegistration } from './context/Registration.tsx'
 import { Avatar } from './icons/Avatar.tsx'
 import { Mastodon } from './icons/Mastodon.tsx'
 import { Matrix } from './icons/Matrix.tsx'
-import { GitHub, Homepage, LinkedIn } from './LucideIcon.tsx'
+import { GitHub, Homepage, LinkedIn } from './Icons.tsx'
 
 import './ProfilePreview.css'
 
