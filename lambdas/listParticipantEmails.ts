@@ -40,7 +40,7 @@ export const handler = async (
 			},
 			body: profiles
 				.map(({ email, name }) => `"${name}" <${email}>`)
-				.join('\n'),
+				.join(', \n'),
 		}
 	} catch (err) {
 		console.error(err)
