@@ -35,7 +35,7 @@ export class BackendStack extends Stack {
 				hash: packedLayer.hash,
 			}).code,
 			compatibleArchitectures: [Lambda.Architecture.ARM_64],
-			compatibleRuntimes: [Lambda.Runtime.NODEJS_22_X],
+			compatibleRuntimes: [Lambda.Runtime.NODEJS_24_X],
 		})
 
 		const confirmEmail = new ConfirmEmail(this, {
