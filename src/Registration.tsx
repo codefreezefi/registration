@@ -23,6 +23,31 @@ export const Registration = () => {
 						<h1>Codefreeze {Codefreeze.start.getFullYear()} Registration</h1>
 					</div>
 					<div class="card-body">
+						<div class="alert alert-warning" role="alert">
+							<strong>Warning:</strong> the hotel system used by Suomen Latu
+							Kiilopää announced on October 8th that a data breach has occurred.
+							Based on current information, the data leak affects customers with
+							reservations scheduled for arrival on or after October 6th. The
+							data exposed includes customer details associated with
+							reservations, contact information, and reservation dates. Customer
+							payment details (such as credit card information) are not stored
+							in the system in question, so they could not have been leaked.
+							However, your reservation’s arrival and departure dates could be
+							used in fraudulent messages attempting to obtain the recipient’s
+							payment details. Suomen Latu Kiilopää never requests credit card
+							details or online banking credentials via telephone, email, text
+							message, or WhatsApp. The breach may be ongoing and it may affect
+							new guests as well. If you receive such a request, do not pay it.
+							Only communicate with the hotel{' '}
+							<a
+								href="https://www.kiilopaa.fi/en/contact-information"
+								target="_blank"
+								rel="noreferrer noopener"
+							>
+								through the channels they have published on their website
+							</a>
+							.
+						</div>
 						<p>
 							Please complete this form to register for Codefreeze{' '}
 							{Codefreeze.start.getFullYear()}.
