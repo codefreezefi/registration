@@ -25,7 +25,7 @@ export const Registration = () => {
 					<div class="card-body">
 						<div class="alert alert-warning" role="alert">
 							<strong>Warning:</strong> the hotel system used by Suomen Latu
-							Kiilopää announced on October 8th that a data breach has occurred.
+							Kiilopää announced on October 8th 2026 that a data breach has occurred.
 							Based on current information, the data leak affects customers with
 							reservations scheduled for arrival on or after October 6th. The
 							data exposed includes customer details associated with
