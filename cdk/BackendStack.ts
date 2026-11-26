@@ -8,6 +8,7 @@ import {
 	Stack,
 } from 'aws-cdk-lib'
 import { ConfirmEmail } from './ConfirmEmail.ts'
+import { DeletionNotification } from './DeletionNotification.ts'
 import type { BackendLambdas } from './lambdas/packBackendLambdas.ts'
 import { ParticipantsList } from './ParticipantsList.ts'
 import { PublicProfiles } from './PublicProfiles.ts'
@@ -45,6 +46,12 @@ export class BackendStack extends Stack {
 		})
 
 		const register = new Register(this, {
+			lambdas,
+			registrations,
+			layer,
+		})
+
+		new DeletionNotification(this, {
 			lambdas,
 			registrations,
 			layer,

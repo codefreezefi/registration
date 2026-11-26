@@ -133,9 +133,25 @@ export class PublicProfiles extends Construct {
 			},
 		)
 
+		// Only modified registrations that have a Codefreeze edition assigned
+		// and whose public profile is not disabled (publicProfile is either true or not set).
+		const onPublishFilter = (publicProfile: Record<string, unknown>) =>
+			Lambda.FilterCriteria.filter({
+				eventName: Lambda.FilterRule.isEqual('MODIFY'),
+				dynamodb: {
+					NewImage: {
+						codefreeze: { N: Lambda.FilterRule.exists() },
+						publicProfile,
+					},
+				},
+			})
 		onPublish.fn.addEventSource(
 			new EventSources.DynamoEventSource(registrations.registrationsTable, {
 				startingPosition: Lambda.StartingPosition.LATEST,
+				filters: [
+					onPublishFilter({ BOOL: Lambda.FilterRule.isEqual(true) }),
+					onPublishFilter({ BOOL: Lambda.FilterRule.notExists() }),
+				],
 			}),
 		)
 	}

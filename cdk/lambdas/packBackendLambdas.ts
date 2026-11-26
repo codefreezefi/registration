@@ -11,6 +11,7 @@ export type BackendLambdas = {
 	listPublicProfiles: PackedLambda
 	listParticipantEmails: PackedLambda
 	onPublish: PackedLambda
+	onDelete: PackedLambda
 }
 
 const pack = async (id: string) =>
@@ -24,4 +25,5 @@ export const packBackendLambdas = async (): Promise<BackendLambdas> => ({
 	listPublicProfiles: await pack('listPublicProfiles'),
 	listParticipantEmails: await pack('listParticipantEmails'),
 	onPublish: await pack('onPublish'),
+	onDelete: await pack('onDelete'),
 })

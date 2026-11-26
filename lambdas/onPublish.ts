@@ -10,20 +10,19 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
 	console.log(JSON.stringify(event, null, 2))
 
 	for (const Record of event.Records) {
-		if (Record.eventName !== 'MODIFY') continue
-		const NewImage = Record?.dynamodb?.NewImage
-		const OldImage = Record?.dynamodb?.OldImage
-		if (NewImage === undefined) continue
-		const OldProfile = unmarshall(OldImage as Record<string, AttributeValue>)
-		const UpdatedProfile = unmarshall(
-			NewImage as Record<string, AttributeValue>,
+		// Event filter rules ensure these are MODIFY events of registrations with
+		// a Codefreeze edition and a public profile (see cdk/PublicProfiles.ts).
+		const OldProfile = unmarshall(
+			Record.dynamodb?.OldImage as Record<string, AttributeValue>,
 		)
-		if (OldProfile.codefreeze === UpdatedProfile.codefreeze) return
+		const UpdatedProfile = unmarshall(
+			Record.dynamodb?.NewImage as Record<string, AttributeValue>,
+		)
+		// Filter rules cannot compare old and new values, so this check remains here.
+		if (OldProfile.codefreeze === UpdatedProfile.codefreeze) continue
 		console.log(
 			`Codefreeze changed from ${OldProfile.codefreeze} to ${UpdatedProfile.codefreeze}`,
 		)
-		if (UpdatedProfile.codefreeze === undefined) return
-		if (UpdatedProfile.publicProfile === false) return
 
 		await ses.send(
 			new SendEmailCommand({
