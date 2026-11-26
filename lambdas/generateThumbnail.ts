@@ -1,5 +1,5 @@
 import {
-	AttributeValue,
+	type AttributeValue,
 	DynamoDBClient,
 	UpdateItemCommand,
 } from '@aws-sdk/client-dynamodb'
